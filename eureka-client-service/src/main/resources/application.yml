@@ -1,0 +1,11 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: eureka-client-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
