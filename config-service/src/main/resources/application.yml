@@ -15,3 +15,8 @@ spring:
           uri: ${GITHUB_URL}
           default-label: master
           search-paths: "{application}"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

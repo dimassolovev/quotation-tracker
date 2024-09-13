@@ -19,6 +19,7 @@
         <module>eureka-client-service</module>
         <module>gateway-service</module>
         <module>config-service</module>
+        <module>authentication-service</module>
     </modules>
 
 </project>
