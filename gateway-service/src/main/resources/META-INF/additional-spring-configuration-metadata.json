@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "authentication.token-endpoint",
+      "type": "java.lang.String",
+      "description": "Description for authentication.token-endpoint."
+    },
+    {
+      "name": "authentication.validate-token-endpoint",
+      "type": "java.lang.String",
+      "description": "Description for authentication.validate-token-endpoint."
+    },
+    {
+      "name": "authentication.register-endpoint",
+      "type": "java.lang.String",
+      "description": "Description for authentication.register-endpoint."
+    },
+    {
+      "name": "base-url",
+      "type": "java.lang.String",
+      "description": "Description for authentication.base-url."
+    }
+  ] }

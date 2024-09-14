@@ -1,6 +1,7 @@
 package com.dimas.authenticationservice.configuration;
 
-import com.dimas.authenticationservice.services.UserService;
+import com.dimas.authenticationservice.service.UserService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletResponse;
