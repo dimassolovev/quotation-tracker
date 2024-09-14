@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 public class AuthenticationConfig {
     private final ObjectMapper objectMapper;
     private final UserService userService;

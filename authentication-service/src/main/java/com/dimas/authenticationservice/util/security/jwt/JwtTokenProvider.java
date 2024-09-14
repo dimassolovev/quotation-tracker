@@ -22,7 +22,7 @@ import java.util.Map;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
     private SecretKey secretKey;

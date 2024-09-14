@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 @Transactional(readOnly = true)
 public class AuthenticationService {
     private final UserCredentialsRepository userCredentialsRepository;

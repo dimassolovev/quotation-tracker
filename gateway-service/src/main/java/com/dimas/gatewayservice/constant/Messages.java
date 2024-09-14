@@ -1,7 +1,9 @@
 package com.dimas.gatewayservice.constant;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public enum Messages {
     ROUTE_IS_NOT_SECURED("Route is not secured"),
@@ -11,8 +13,4 @@ public enum Messages {
     TOKEN_VALIDATION_FAILED("Token validation failed"),;
 
     private final String message;
-
-    Messages(String message) {
-        this.message = message;
-    }
 }

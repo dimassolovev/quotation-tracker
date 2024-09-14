@@ -21,5 +21,4 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionMessage> handleEntryException(EntryException exception) {
         return new ResponseEntity<>(new ExceptionMessage(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
-
 }

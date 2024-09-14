@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 @Transactional(readOnly = true)
 public class UserService implements UserDetailsService {
     private final UserCredentialsRepository userCredentialsRepository;
