@@ -23,5 +23,4 @@ public class TestController {
     public Map<String, String> hello1() {
         return Map.of("instance", instanceId);
     }
-
 }

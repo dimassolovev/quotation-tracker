@@ -1,5 +1,6 @@
 package com.dimas.authenticationservice.configuration;
 
+import com.dimas.authenticationservice.model.dto.ExceptionMessage;
 import com.dimas.authenticationservice.service.UserService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,8 +24,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
@@ -50,11 +49,9 @@ public class AuthenticationConfig {
                             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                             response.setCharacterEncoding("UTF-8");
 
-                            String jsonResponse = objectMapper.writeValueAsString(Map.of(
-                                    "error", "Authentication failed",
-                                    "message", ex.getMessage(),
-                                    "timestamp", System.currentTimeMillis()
-                            ));
+                            String jsonResponse = objectMapper.writeValueAsString(
+                                    new ExceptionMessage(ex.getMessage())
+                            );
                             response.getWriter().write(jsonResponse);
                         }
                 )
