@@ -1,6 +1,6 @@
 spring:
   application:
-    name: eureka-client-service
+    name: stock-data-aggregator-service
 
   config:
     import: configserver:http://localhost:${CONFIG_SERVICE_PORT}
