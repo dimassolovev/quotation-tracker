@@ -1,10 +1,51 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: stock-data-aggregator-service
 
-  config:
-    import: configserver:http://localhost:${CONFIG_SERVICE_PORT}
-
   cloud:
-    config:
-      uri: ${GITHUB_URL}
+    openfeign:
+      client:
+        config:
+          moex-client:
+            url: https://iss.moex.com
+
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
+#  instance:
+#    instance-id: ${random.uuid}
+
+
+scheduler:
+  currency-moex-client:
+    cron-expression: "0 0 18 * * *"
+    limit: 100
+    securities:
+      - "GBP"
+      - "USD"
+      - "EUR"
+      - "CAD"
+      - "CHF"
+      - "KZT"
+      - "JPY"
+      - "CNY"
+    meta-mode: "on"
+    choice:
+    string-order:
+
+  stock-moex-client:
+    cron-expression: "0 0 18 * * *"
+    limit: 100
+    meta-mode: "on"
+    language: "eng"
+    sort-column:
+    sort-order:
+    start:
+    num-trades:
+
+

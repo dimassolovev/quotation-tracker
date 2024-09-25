@@ -1,0 +1,73 @@
+{
+  "properties": [
+    {
+      "name": "scheduler.currency-moex-client.cron-expression",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.cron-expression."
+    },
+    {
+      "name": "scheduler.currency-moex-client.limit",
+      "type": "java.lang.Integer",
+      "description": "Description for scheduler.currency-moex-client.limit."
+    },
+    {
+      "name": "scheduler.currency-moex-client.securities",
+      "type": "java.util.List",
+      "description": "Description for scheduler.currency-moex-client.securities."
+    },
+    {
+      "name": "scheduler.currency-moex-client.meta-mode",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.meta-mode."
+    },
+    {
+      "name": "scheduler.currency-moex-client.choice",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.choice."
+    },
+    {
+      "name": "scheduler.currency-moex-client.string-order",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.string-order."
+    },
+    {
+      "name": "scheduler.stock-moex-client.cron-expression",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.stock-moex-client.cron-expression."
+    },
+    {
+      "name": "scheduler.stock-moex-client.limit",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.stock-moex-client.limit."
+    },
+    {
+      "name": "scheduler.stock-moex-client.meta-mode",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.stock-moex-client.meta-mode."
+    },
+    {
+      "name": "scheduler.stock-moex-client.language",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.stock-moex-client.language."
+    },
+    {
+      "name": "scheduler.stock-moex-client.sort-column",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.stock-moex-client.sort-column."
+    },
+    {
+      "name": "scheduler.stock-moex-client.sort-order",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.stock-moex-client.sort-order."
+    },
+    {
+      "name": "scheduler.stock-moex-client.start",
+      "type": "java.lang.Integer",
+      "description": "Description for scheduler.stock-moex-client.start."
+    },
+    {
+      "name": "scheduler.stock-moex-client.num-trades",
+      "type": "java.lang.Integer",
+      "description": "Description for scheduler.stock-moex-client.num-trades."
+    }
+  ] }

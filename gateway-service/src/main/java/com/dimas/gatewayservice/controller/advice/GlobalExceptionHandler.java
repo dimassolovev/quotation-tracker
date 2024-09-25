@@ -1,4 +1,4 @@
-package com.dimas.gatewayservice.controller;
+package com.dimas.gatewayservice.controller.advice;
 
 import com.dimas.gatewayservice.exception.FilterException;
 

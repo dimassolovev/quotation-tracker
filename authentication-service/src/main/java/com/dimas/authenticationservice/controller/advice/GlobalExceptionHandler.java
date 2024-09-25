@@ -1,4 +1,4 @@
-package com.dimas.authenticationservice.controller;
+package com.dimas.authenticationservice.controller.advice;
 
 import com.dimas.authenticationservice.exception.EntryException;
 import com.dimas.authenticationservice.exception.GeneratingTokenException;
