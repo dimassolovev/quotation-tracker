@@ -5,7 +5,6 @@ import com.dimas.authenticationservice.repository.UserCredentialsRepository;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class UserService implements UserDetailsService {
     private final UserCredentialsRepository userCredentialsRepository;

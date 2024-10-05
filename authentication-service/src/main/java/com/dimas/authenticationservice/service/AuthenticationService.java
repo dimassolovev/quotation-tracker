@@ -13,7 +13,6 @@ import com.dimas.authenticationservice.util.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +25,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AuthenticationService {
     private final UserCredentialsRepository userCredentialsRepository;
@@ -36,7 +35,7 @@ public class AuthenticationService {
     private final RoleService roleService;
 
     @Transactional
-    public void saveUser(AuthenticationRequest authenticationRequest) {
+    public void saveUser(AuthenticationRequest authenticationRequest) throws EntryException {
         UserCredentials userCredentials = UserCredentialsMapper.INSTANCE.authenticationRequestAuthenticationToUserCredentials(authenticationRequest);
         Role role = roleService.findByName("ROLE_USER");
 
@@ -55,7 +54,7 @@ public class AuthenticationService {
         }
     }
 
-    public String generateToken(AuthenticationRequest authenticationRequest) {
+    public String generateToken(AuthenticationRequest authenticationRequest) throws GeneratingTokenException  {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -72,7 +71,7 @@ public class AuthenticationService {
 
         catch (Exception exception) {
             log.error(exception.getMessage(), exception);
-            throw new RuntimeException();
+            throw new GeneratingTokenException(Messages.USER_NOT_FOUND);
         }
     }
 

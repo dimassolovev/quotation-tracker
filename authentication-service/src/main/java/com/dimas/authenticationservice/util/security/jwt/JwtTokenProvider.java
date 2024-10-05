@@ -10,7 +10,6 @@ import javax.crypto.SecretKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
@@ -22,7 +21,7 @@ import java.util.Map;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
+@RequiredArgsConstructor
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
     private SecretKey secretKey;

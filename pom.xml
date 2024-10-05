@@ -107,12 +107,10 @@
 
     <modules>
         <module>discovery-service</module>
-        <module>eureka-client-service</module>
         <module>gateway-service</module>
         <module>config-service</module>
         <module>authentication-service</module>
         <module>stock-data-aggregator-service</module>
-        <module>write-service</module>
     </modules>
 
 </project>

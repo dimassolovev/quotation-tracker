@@ -7,11 +7,12 @@ import com.dimas.authenticationservice.repository.RoleRepository;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class RoleService {
     private final RoleRepository roleRepository;
 
