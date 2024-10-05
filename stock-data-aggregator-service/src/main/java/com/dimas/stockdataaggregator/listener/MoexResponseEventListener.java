@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class MoexResponseEventListener {
     @EventListener
     public void handleMoexResponse(MoexResponseEvent event) {
+        // some actions... Kafka maybe
         System.out.println(event.getMoexDataList());
     }
 }

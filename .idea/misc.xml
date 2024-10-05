@@ -7,7 +7,14 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/config-service/pom.xml" />
         <option value="$PROJECT_DIR$/authentication-service/pom.xml" />
+        <option value="$PROJECT_DIR$/write-service/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/eureka-client-service/pom.xml" />
+        <option value="$PROJECT_DIR$/write-service/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">

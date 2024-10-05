@@ -1,9 +1,10 @@
-package com.dimas.stockdataaggregator.service.api;
+package com.dimas.stockdataaggregator.service.moex.api.client;
 
 import com.dimas.stockdataaggregator.constant.property.CurrencyMoexClientProperty;
 import com.dimas.stockdataaggregator.model.external.MoexData;
 import com.dimas.stockdataaggregator.model.external.currency.CurrencyData;
 
+import com.dimas.stockdataaggregator.service.moex.api.MoscowExchangeClientService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;

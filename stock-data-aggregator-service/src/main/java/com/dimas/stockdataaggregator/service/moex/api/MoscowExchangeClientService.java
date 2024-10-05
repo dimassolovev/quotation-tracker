@@ -1,4 +1,4 @@
-package com.dimas.stockdataaggregator.service.api;
+package com.dimas.stockdataaggregator.service.moex.api;
 
 import com.dimas.stockdataaggregator.client.MoscowExchangeClient;
 import com.dimas.stockdataaggregator.constant.Message;
@@ -18,11 +18,12 @@ import java.io.IOException;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MoscowExchangeClientService {
+public class MoscowExchangeClientService implements MoexCurrencyClient, MoexStockClient {
     private final MoscowExchangeClient moscowExchangeClient;
     private final CsvCurrencyDataFromMoscowExchangeService csvCurrencyDataFromMoscowExchangeService;
     private final CsvPromotionDataFromMoscowExchangeService csvPromotionDataFromMoscowExchangeService;
 
+    @Override
     public CurrencyData getCurrency(String security, String from, String till, String mode, String choice, Integer limit, String stringOrder) {
         String response = moscowExchangeClient.getCurrency(
                 security, from, till, mode, choice, limit, stringOrder
@@ -37,6 +38,7 @@ public class MoscowExchangeClientService {
         throw new ParseObjectException(Message.PARSE_OBJECT_EXCEPTION);
     }
 
+    @Override
     public StockHistoryData getTradeHistory(
             Integer limit, String sortColumn, String sortOrder, String language, Integer start,
             Integer numTrades, String mode, String date) {

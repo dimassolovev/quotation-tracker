@@ -69,5 +69,15 @@
       "name": "scheduler.stock-moex-client.num-trades",
       "type": "java.lang.Integer",
       "description": "Description for scheduler.stock-moex-client.num-trades."
+    },
+    {
+      "name": "kafka.topics.currency-topic",
+      "type": "java.lang.String",
+      "description": "Description for kafka.topics.currency-topic."
+    },
+    {
+      "name": "kafka.topics.stock-topic",
+      "type": "java.lang.String",
+      "description": "Description for kafka.topics.stock-topic."
     }
   ] }

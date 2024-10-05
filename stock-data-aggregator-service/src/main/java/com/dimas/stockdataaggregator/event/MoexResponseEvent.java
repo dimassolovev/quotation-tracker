@@ -1,7 +1,9 @@
 package com.dimas.stockdataaggregator.event;
 
 import com.dimas.stockdataaggregator.model.external.MoexData;
+
 import lombok.Getter;
+
 import org.springframework.context.ApplicationEvent;
 
 import java.util.List;

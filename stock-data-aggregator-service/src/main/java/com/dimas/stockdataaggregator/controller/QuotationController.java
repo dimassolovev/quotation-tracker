@@ -3,10 +3,9 @@ package com.dimas.stockdataaggregator.controller;
 import com.dimas.stockdataaggregator.model.external.currency.CurrencyData;
 import com.dimas.stockdataaggregator.model.external.stock.StockHistoryData;
 
-import com.dimas.stockdataaggregator.service.api.MoscowExchangeClientService;
+import com.dimas.stockdataaggregator.service.moex.api.MoscowExchangeClientService;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

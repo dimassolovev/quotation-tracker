@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-table-user-role
+      id: 3
       author: dimas
       comment: first liquibase migration
       changes:

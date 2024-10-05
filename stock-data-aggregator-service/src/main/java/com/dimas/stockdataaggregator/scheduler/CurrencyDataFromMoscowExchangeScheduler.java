@@ -2,7 +2,7 @@ package com.dimas.stockdataaggregator.scheduler;
 
 import com.dimas.stockdataaggregator.model.external.MoexData;
 import com.dimas.stockdataaggregator.publisher.MoexResponseEventPublisher;
-import com.dimas.stockdataaggregator.service.api.CurrencyDataFromMoscowExchangeService;
+import com.dimas.stockdataaggregator.service.moex.api.client.CurrencyDataFromMoscowExchangeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
