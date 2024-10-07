@@ -66,14 +66,4 @@ scheduler:
     choice:
     string-order:
 
-  stock-moex-client:
-    cron-expression: "0 0 18 * * *"
-    limit: 100
-    meta-mode: "on"
-    language: "eng"
-    sort-column:
-    sort-order:
-    start:
-    num-trades:
-
 
