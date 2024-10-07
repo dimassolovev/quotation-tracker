@@ -33,10 +33,11 @@ public class AuthenticationService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final RoleService roleService;
+    private final UserCredentialsMapper userCredentialsMapper;
 
     @Transactional
     public void saveUser(AuthenticationRequest authenticationRequest) throws EntryException {
-        UserCredentials userCredentials = UserCredentialsMapper.INSTANCE.authenticationRequestAuthenticationToUserCredentials(authenticationRequest);
+        UserCredentials userCredentials = userCredentialsMapper.toEntity(authenticationRequest);
         Role role = roleService.findByName("ROLE_USER");
 
         userCredentials.setPassword(

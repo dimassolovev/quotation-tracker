@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: moex-notification-service
+
+#  mail:
+#    username: .  # Gmail
+#    password: .  # App password
+#    host: smtp.gmail.com
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+
+server:
+  port: 8081

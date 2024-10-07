@@ -7,17 +7,12 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Data
 @NoArgsConstructor
-@ConfigurationProperties(prefix = "scheduler.currency-moex-client")
+@ConfigurationProperties(prefix = "kafka")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CurrencyMoexClientProperty {
-    Integer limit;
-    List<String> securities;
-    String metaMode;
-    String choice;
-    String stringOrder;
+public class KafkaConfigurationProperty {
+    Integer retention;
+    String topic;
 }

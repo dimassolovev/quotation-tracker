@@ -1,11 +1,8 @@
 package com.dimas.stockdataaggregator.controller;
 
-import com.dimas.stockdataaggregator.model.external.currency.CurrencyData;
-import com.dimas.stockdataaggregator.model.external.stock.StockHistoryData;
-
+import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import com.dimas.stockdataaggregator.service.moex.api.MoscowExchangeClientService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,23 +25,6 @@ public class QuotationController {
         return moscowExchangeClientService.getCurrency(
                 String.format("%s/%s", firstCurrency, secondCurrency),
                 from, till, mode, choice, limit, stringOrder
-        );
-    }
-
-    @GetMapping("/stock")
-    public StockHistoryData getStock(
-            @RequestParam(required = false, name = "limit") Integer limit,
-            @RequestParam(required = false, name = "sort_column") String sortColumn,
-            @RequestParam(required = false, name = "sort_order") String sortOrder,
-            @RequestParam(required = false, name = "lang") String language,
-            @RequestParam(required = false, name = "start") Integer start,
-            @RequestParam(required = false, name = "numtrades") Integer numTrades,
-            @RequestParam(required = false, name = "iss.meta") String mode,
-            @RequestParam(required = false, name = "date") String date
-    ) {
-
-        return moscowExchangeClientService.getTradeHistory(
-                limit, sortColumn, sortOrder, language, start, numTrades, mode, date
         );
     }
 }

@@ -1,12 +1,9 @@
 package com.dimas.stockdataaggregator.service.moex.api.client;
 
 import com.dimas.stockdataaggregator.constant.property.CurrencyMoexClientProperty;
-import com.dimas.stockdataaggregator.model.external.MoexData;
-import com.dimas.stockdataaggregator.model.external.currency.CurrencyData;
-
+import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import com.dimas.stockdataaggregator.service.moex.api.MoscowExchangeClientService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,10 +18,10 @@ public class CurrencyDataFromMoscowExchangeService {
     private final MoscowExchangeClientService moscowExchangeClientService;
     private final DateTimeFormatter dateTimeFormatter;
 
-    public List<MoexData> getCurrencyData() {
+    public List<CurrencyData> getCurrencyData() {
         String currentDate = LocalDate.now().format(dateTimeFormatter);
         String pastDate = LocalDate.parse(currentDate, dateTimeFormatter).minusDays(10).format(dateTimeFormatter);
-        List<MoexData> currencyDataList = new ArrayList<>();
+        List<CurrencyData> currencyDataList = new ArrayList<>();
 
         for (String security: currencyMoexClientProperty.getSecurities()) {
             CurrencyData currencyData;

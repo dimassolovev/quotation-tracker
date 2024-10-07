@@ -5,12 +5,42 @@ spring:
   application:
     name: stock-data-aggregator-service
 
+  kafka:
+    bootstrap-servers: localhost:9092                                                # Адреса Kafka брокеров
+
+    properties:
+      num.partitions: 3                                                              # Количество партиций по умолчанию
+      default.replication.factor: 3                                                  # Фактор репликации
+      min.insync.replicas: 2                                                         # Минимальная количество реплик в синхронизации
+      log.retention.hours: 168                                                       # Время хранения логов в часах
+      log.cleanup.policy: compact                                                    # Политика очистки логов
+      delete.retention.ms: 86400000                                                  # Время хранения удаленных сообщений
+      connections.max.idle.ms: 10000                                                 # Максимальное время простоя соединения
+      security.inter.broker.protocol: PLAINTEXT                                      # Протокол для связи между брокерами
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer           # Сериализатор ключей
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer  # Сериализатор значений
+      acks: all                                                                      # Все реплики должны подтвердить запись
+      retries: 3                                                                     # Количество повторных попыток при неудаче
+      properties:
+        linger.ms: 5                                                                 # Задержка перед отправкой сообщений
+        batch.size: 16384                                                            # Размер партии сообщений
+        buffer.memory: 33554432                                                      # Максимальный размер памяти для буфера сообщений (32 МБ)
+        enable.idempotence: true                                                     # Включение идемпотентности для предотвращения дублирования
+        spring.json.trusted.packages: "com.dimas.stockdataaggregator.model"          # Доверенные пакеты для сериализации
+
   cloud:
     openfeign:
       client:
         config:
           moex-client:
             url: https://iss.moex.com
+
+kafka:
+  retention: 14  # удержание в кафке в днях
+  topic: "quotation.moex-data.currencies"
+
 
 #eureka:
 #  client:

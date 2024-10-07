@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/config-service/pom.xml" />
         <option value="$PROJECT_DIR$/authentication-service/pom.xml" />
         <option value="$PROJECT_DIR$/write-service/pom.xml" />
+        <option value="$PROJECT_DIR$/moex-notification-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -1,16 +1,13 @@
 package com.dimas.stockdataaggregator.util.scraper;
 
-import com.dimas.stockdataaggregator.model.external.currency.CurrencyData;
-import com.dimas.stockdataaggregator.model.external.currency.Security;
-import com.dimas.stockdataaggregator.model.external.currency.Current;
+import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
+import com.dimas.stockdataaggregator.model.external.moex.currency.Current;
+import com.dimas.stockdataaggregator.model.external.moex.currency.Security;
 import com.dimas.stockdataaggregator.util.tool.StringTool;
-
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

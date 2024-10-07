@@ -79,5 +79,20 @@
       "name": "kafka.topics.stock-topic",
       "type": "java.lang.String",
       "description": "Description for kafka.topics.stock-topic."
+    },
+    {
+      "name": "topic.name",
+      "type": "java.lang.String",
+      "description": "Description for topic.name."
+    },
+    {
+      "name": "kafka.topic",
+      "type": "java.lang.String",
+      "description": "Description for kafka.topic."
+    },
+    {
+      "name": "kafka.retention",
+      "type": "java.lang.Integer",
+      "description": "Description for kafka.retention."
     }
   ] }

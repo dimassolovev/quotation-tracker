@@ -1,6 +1,7 @@
 package com.dimas.stockdataaggregator.scheduler;
 
-import com.dimas.stockdataaggregator.model.external.MoexData;
+import com.dimas.stockdataaggregator.model.external.DataFromExternalServices;
+import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import com.dimas.stockdataaggregator.publisher.MoexResponseEventPublisher;
 import com.dimas.stockdataaggregator.service.moex.api.client.CurrencyDataFromMoscowExchangeService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,11 @@ public class CurrencyDataFromMoscowExchangeScheduler {
 //    @Scheduled(cron = "${scheduler.currency-moex-client.cron-expression}")
     @Scheduled(fixedRate = 60000)
     public void poll() {
-        List<MoexData> moexDataList = currencyDataFromMoscowExchangeService.getCurrencyData();
+        DataFromExternalServices dataFromExternalServices = new DataFromExternalServices();
+        List<CurrencyData> currencyDataList = currencyDataFromMoscowExchangeService.getCurrencyData();
 
-        moexResponseEventPublisher.publishMoexResponseEvent(moexDataList);
+        dataFromExternalServices.setData(currencyDataList);
+
+        moexResponseEventPublisher.publishMoexResponseEvent(dataFromExternalServices);
     }
 }

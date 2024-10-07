@@ -1,6 +1,6 @@
 package com.dimas.stockdataaggregator.service.moex.api;
 
-import com.dimas.stockdataaggregator.model.external.currency.CurrencyData;
+import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 
 public interface MoexCurrencyClient {
     CurrencyData getCurrency(String security, String from, String till, String mode,

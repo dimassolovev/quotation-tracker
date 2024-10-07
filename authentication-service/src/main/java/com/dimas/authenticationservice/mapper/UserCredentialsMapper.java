@@ -10,9 +10,4 @@ import org.springframework.stereotype.Component;
 
 @Mapper
 @Component
-public interface UserCredentialsMapper {
-    UserCredentialsMapper INSTANCE = Mappers.getMapper(UserCredentialsMapper.class);
-
-    UserCredentials authenticationRequestAuthenticationToUserCredentials(AuthenticationRequest authenticationRequest);
-    AuthenticationRequest userCredentialsToAuthenticationRequest(UserCredentials userCredentials);
-}
+public interface UserCredentialsMapper extends Mappable<UserCredentials, AuthenticationRequest> { }

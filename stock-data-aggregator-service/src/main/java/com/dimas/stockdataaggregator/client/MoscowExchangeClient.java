@@ -18,16 +18,4 @@ public interface MoscowExchangeClient {
             @RequestParam(required = false, name = "limit") Integer limit,
             @RequestParam(required = false, name = "sort_order") String stringOrder
     );
-
-    @GetMapping(value = "/iss/history/engines/stock/markets/shares/securities.csv")
-    String getTradeHistory(
-            @RequestParam(required = false, name = "limit") Integer limit,
-            @RequestParam(required = false, name = "sort_column") String sortColumn,
-            @RequestParam(required = false, name = "sort_order") String sortOrder,
-            @RequestParam(required = false, name = "lang") String language,
-            @RequestParam(required = false, name = "start") Integer start,
-            @RequestParam(required = false, name = "numtrades") Integer numTrades,
-            @RequestParam(required = false, name = "iss.meta", defaultValue = "on") String mode,
-            @RequestParam(required = false, name = "date") String date
-    );
 }
