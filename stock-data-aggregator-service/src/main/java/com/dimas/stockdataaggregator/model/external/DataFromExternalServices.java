@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DataFromExternalServices {
-    private Object data;
+public class DataFromExternalServices<T> {
+    private T data;
 }

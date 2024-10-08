@@ -1,7 +1,7 @@
 package com.dimas.stockdataaggregator.listener;
 
 import com.dimas.stockdataaggregator.event.MoexResponseEvent;
-import com.dimas.stockdataaggregator.kafka.producer.KafkaCurrencyDataMessagePublisher;
+import com.dimas.stockdataaggregator.kafka.producer.KafkaDataMessagePublisher;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +13,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class MoexResponseEventListener {
-    private final KafkaCurrencyDataMessagePublisher kafkaCurrencyDataMessagePublisher;
+    private final KafkaDataMessagePublisher kafkaCurrencyDataMessagePublisher;
 
     @EventListener
     public void handleMoexResponse(MoexResponseEvent event) {
         try {
-            this.kafkaCurrencyDataMessagePublisher.sendMessage(event.getDataFromExternalServices());
+            this.kafkaCurrencyDataMessagePublisher.sendMessage(
+                    event.getDataFromExternalServices()
+            );
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }

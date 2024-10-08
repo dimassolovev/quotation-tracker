@@ -3,6 +3,7 @@ package com.dimas.stockdataaggregator.configuration;
 import com.dimas.stockdataaggregator.constant.property.KafkaConfigurationProperty;
 import com.dimas.stockdataaggregator.model.external.DataFromExternalServices;
 
+import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.kafka.clients.admin.NewTopic;
@@ -22,6 +23,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @EnableKafka
@@ -33,7 +35,7 @@ public class KafkaProducerConfig {
     private String bootstrapServers;
 
     @Bean
-    public ProducerFactory<Long, DataFromExternalServices> producerFactory() {
+    public ProducerFactory<Long, DataFromExternalServices<?>> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
 
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
@@ -46,7 +48,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<Long, DataFromExternalServices> kafkaTemplate() {
+    public KafkaTemplate<Long, DataFromExternalServices<?>> kafkaTemplate() {
         return new KafkaTemplate<>(this.producerFactory());
     }
 

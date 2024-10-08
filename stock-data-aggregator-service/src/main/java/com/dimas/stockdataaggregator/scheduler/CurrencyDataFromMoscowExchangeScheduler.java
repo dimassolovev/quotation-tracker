@@ -25,7 +25,7 @@ public class CurrencyDataFromMoscowExchangeScheduler {
 //    @Scheduled(cron = "${scheduler.currency-moex-client.cron-expression}")
     @Scheduled(fixedRate = 60000)
     public void poll() {
-        DataFromExternalServices dataFromExternalServices = new DataFromExternalServices();
+        DataFromExternalServices<List<CurrencyData>> dataFromExternalServices = new DataFromExternalServices<>();
         List<CurrencyData> currencyDataList = this.currencyDataFromMoscowExchangeService.getCurrencyData();
 
         dataFromExternalServices.setData(currencyDataList);

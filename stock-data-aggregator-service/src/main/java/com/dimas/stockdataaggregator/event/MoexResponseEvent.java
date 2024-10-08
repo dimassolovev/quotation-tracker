@@ -6,9 +6,9 @@ import org.springframework.context.ApplicationEvent;
 
 @Getter
 public class MoexResponseEvent extends ApplicationEvent {
-    private final DataFromExternalServices dataFromExternalServices;
+    private final DataFromExternalServices<?> dataFromExternalServices;
 
-    public MoexResponseEvent(Object source, DataFromExternalServices dataFromExternalServices) {
+    public MoexResponseEvent(Object source, DataFromExternalServices<?> dataFromExternalServices) {
         super(source);
         this.dataFromExternalServices = dataFromExternalServices;
     }
