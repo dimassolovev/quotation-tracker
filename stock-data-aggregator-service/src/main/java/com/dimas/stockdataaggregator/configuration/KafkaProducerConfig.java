@@ -3,7 +3,6 @@ package com.dimas.stockdataaggregator.configuration;
 import com.dimas.stockdataaggregator.constant.property.KafkaConfigurationProperty;
 import com.dimas.stockdataaggregator.model.external.DataFromExternalServices;
 
-import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.kafka.clients.admin.NewTopic;
@@ -23,7 +22,6 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.time.Duration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @EnableKafka
@@ -62,7 +60,8 @@ public class KafkaProducerConfig {
                         TopicConfig.RETENTION_MS_CONFIG,
                         String.valueOf(Duration.ofDays(
                                         kafkaConfigurationProperty
-                                                .getRetention())
+                                                .getRetention()
+                                        )
                                 .toMillis()
                         )
                 )
