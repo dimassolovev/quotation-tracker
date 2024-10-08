@@ -1,6 +1,8 @@
 package com.dimas.moexnotificationservice.service;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class KafkaMessageListener {
 
     @KafkaListener(topics = "${kafka.topic}", groupId = "${spring.kafka.consumer.group-id}")
-    public void onMessage(Object data) {
-        log.info("consumer consume the events {} ", data.toString());
+    public void onMessage(ConsumerRecord<Long, Object> data) {
+        log.info("Received data from topic {}: {} ", data.topic(), data.value());
     }
 }

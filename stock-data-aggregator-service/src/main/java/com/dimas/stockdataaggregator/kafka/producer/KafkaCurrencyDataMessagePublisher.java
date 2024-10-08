@@ -23,14 +23,17 @@ public class KafkaCurrencyDataMessagePublisher {
 
     public void sendMessage(DataFromExternalServices dataFromExternalServices) {
         CompletableFuture<SendResult<Long, DataFromExternalServices>> sendResult = this.kafkaTemplate
-                .send(this.kafkaConfigurationProperty.getTopic(), dataFromExternalServices);
+                .send(
+                        this.kafkaConfigurationProperty.getTopic(),
+                        dataFromExternalServices
+                );
 
         try {
             SendResult<Long, DataFromExternalServices> result = sendResult.get();
             RecordMetadata recordMetadata = result.getRecordMetadata();
             log.info(
                     String.format(
-                            "Sent to topic: %s. Partition: %s. OffSet %s. Timestamp: %s",
+                            "Sent data to the topic: %s. Partition: %s. OffSet %s. Timestamp: %s",
                             recordMetadata.topic(),
                             recordMetadata.partition(),
                             recordMetadata.offset(),
