@@ -31,46 +31,6 @@
       "description": "Description for scheduler.currency-moex-client.string-order."
     },
     {
-      "name": "scheduler.stock-moex-client.cron-expression",
-      "type": "java.lang.String",
-      "description": "Description for scheduler.stock-moex-client.cron-expression."
-    },
-    {
-      "name": "scheduler.stock-moex-client.limit",
-      "type": "java.lang.String",
-      "description": "Description for scheduler.stock-moex-client.limit."
-    },
-    {
-      "name": "scheduler.stock-moex-client.meta-mode",
-      "type": "java.lang.String",
-      "description": "Description for scheduler.stock-moex-client.meta-mode."
-    },
-    {
-      "name": "scheduler.stock-moex-client.language",
-      "type": "java.lang.String",
-      "description": "Description for scheduler.stock-moex-client.language."
-    },
-    {
-      "name": "scheduler.stock-moex-client.sort-column",
-      "type": "java.lang.String",
-      "description": "Description for scheduler.stock-moex-client.sort-column."
-    },
-    {
-      "name": "scheduler.stock-moex-client.sort-order",
-      "type": "java.lang.String",
-      "description": "Description for scheduler.stock-moex-client.sort-order."
-    },
-    {
-      "name": "scheduler.stock-moex-client.start",
-      "type": "java.lang.Integer",
-      "description": "Description for scheduler.stock-moex-client.start."
-    },
-    {
-      "name": "scheduler.stock-moex-client.num-trades",
-      "type": "java.lang.Integer",
-      "description": "Description for scheduler.stock-moex-client.num-trades."
-    },
-    {
       "name": "kafka.topics.currency-topic",
       "type": "java.lang.String",
       "description": "Description for kafka.topics.currency-topic."

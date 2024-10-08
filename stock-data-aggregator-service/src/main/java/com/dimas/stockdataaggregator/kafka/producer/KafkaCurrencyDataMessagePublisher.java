@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.kafka.clients.producer.RecordMetadata;
+
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,8 @@ public class KafkaCurrencyDataMessagePublisher {
     private final KafkaConfigurationProperty kafkaConfigurationProperty;
 
     public void sendMessage(DataFromExternalServices dataFromExternalServices) {
-        CompletableFuture<SendResult<Long, DataFromExternalServices>> sendResult = kafkaTemplate.send(kafkaConfigurationProperty.getTopic(), dataFromExternalServices);
+        CompletableFuture<SendResult<Long, DataFromExternalServices>> sendResult = this.kafkaTemplate
+                .send(this.kafkaConfigurationProperty.getTopic(), dataFromExternalServices);
 
         try {
             SendResult<Long, DataFromExternalServices> result = sendResult.get();

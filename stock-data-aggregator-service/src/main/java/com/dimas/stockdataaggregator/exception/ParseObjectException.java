@@ -1,7 +1,6 @@
 package com.dimas.stockdataaggregator.exception;
 
 import lombok.Getter;
-
 import com.dimas.stockdataaggregator.constant.Message;
 
 @Getter

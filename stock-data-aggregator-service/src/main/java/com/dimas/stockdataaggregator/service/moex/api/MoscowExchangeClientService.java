@@ -5,8 +5,10 @@ import com.dimas.stockdataaggregator.constant.Message;
 import com.dimas.stockdataaggregator.exception.ParseObjectException;
 import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import com.dimas.stockdataaggregator.util.scraper.CsvCurrencyDataFromMoscowExchangeService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,12 +22,12 @@ public class MoscowExchangeClientService implements MoexCurrencyClient {
 
     @Override
     public CurrencyData getCurrency(String security, String from, String till, String mode, String choice, Integer limit, String stringOrder) {
-        String response = moscowExchangeClient.getCurrency(
+        String response = this.moscowExchangeClient.getCurrency(
                 security, from, till, mode, choice, limit, stringOrder
         );
 
         try {
-            return csvCurrencyDataFromMoscowExchangeService.parseCurrencyDataFromMoscowExchange(response);
+            return this.csvCurrencyDataFromMoscowExchangeService.parseCurrencyDataFromMoscowExchange(response);
         }
         catch (IOException e) {
             log.error(e.getMessage());

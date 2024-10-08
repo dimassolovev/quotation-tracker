@@ -2,11 +2,14 @@ package com.dimas.stockdataaggregator.configuration;
 
 import com.dimas.stockdataaggregator.constant.property.KafkaConfigurationProperty;
 import com.dimas.stockdataaggregator.model.external.DataFromExternalServices;
+
 import lombok.RequiredArgsConstructor;
+
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.TopicConfig;
 import org.apache.kafka.common.serialization.LongSerializer;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,13 +32,11 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    private final KafkaConfigurationProperty configurationProperty;
-
     @Bean
     public ProducerFactory<Long, DataFromExternalServices> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
 
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
@@ -46,15 +47,15 @@ public class KafkaProducerConfig {
 
     @Bean
     public KafkaTemplate<Long, DataFromExternalServices> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+        return new KafkaTemplate<>(this.producerFactory());
     }
 
     @Bean
     public NewTopic kafkaTopics(KafkaConfigurationProperty kafkaConfigurationProperty) {
         return TopicBuilder
                 .name(kafkaConfigurationProperty.getTopic())
-                .partitions(5)
-                .replicas(1)
+                .partitions(3)
+                .replicas(2)
                 .config(
                         TopicConfig.RETENTION_MS_CONFIG,
                         String.valueOf(Duration.ofDays(

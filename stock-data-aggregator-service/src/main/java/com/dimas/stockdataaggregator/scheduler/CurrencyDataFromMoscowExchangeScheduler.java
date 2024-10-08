@@ -4,7 +4,9 @@ import com.dimas.stockdataaggregator.model.external.DataFromExternalServices;
 import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import com.dimas.stockdataaggregator.publisher.MoexResponseEventPublisher;
 import com.dimas.stockdataaggregator.service.moex.api.client.CurrencyDataFromMoscowExchangeService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,10 +26,10 @@ public class CurrencyDataFromMoscowExchangeScheduler {
     @Scheduled(fixedRate = 60000)
     public void poll() {
         DataFromExternalServices dataFromExternalServices = new DataFromExternalServices();
-        List<CurrencyData> currencyDataList = currencyDataFromMoscowExchangeService.getCurrencyData();
+        List<CurrencyData> currencyDataList = this.currencyDataFromMoscowExchangeService.getCurrencyData();
 
         dataFromExternalServices.setData(currencyDataList);
 
-        moexResponseEventPublisher.publishMoexResponseEvent(dataFromExternalServices);
+        this.moexResponseEventPublisher.publishMoexResponseEvent(dataFromExternalServices);
     }
 }

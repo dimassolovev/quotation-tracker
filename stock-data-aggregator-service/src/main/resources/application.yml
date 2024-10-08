@@ -7,7 +7,6 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092                                                # Адреса Kafka брокеров
-
     properties:
       num.partitions: 3                                                              # Количество партиций по умолчанию
       default.replication.factor: 3                                                  # Фактор репликации
@@ -19,8 +18,6 @@ spring:
       security.inter.broker.protocol: PLAINTEXT                                      # Протокол для связи между брокерами
 
     producer:
-      key-serializer: org.apache.kafka.common.serialization.LongSerializer           # Сериализатор ключей
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer  # Сериализатор значений
       acks: all                                                                      # Все реплики должны подтвердить запись
       retries: 3                                                                     # Количество повторных попыток при неудаче
       properties:
@@ -38,7 +35,7 @@ spring:
             url: https://iss.moex.com
 
 kafka:
-  retention: 14  # удержание в кафке в днях
+  retention: 14
   topic: "quotation.moex-data.currencies"
 
 
