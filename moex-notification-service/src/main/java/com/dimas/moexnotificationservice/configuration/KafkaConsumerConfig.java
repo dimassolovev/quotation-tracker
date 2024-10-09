@@ -1,5 +1,6 @@
 package com.dimas.moexnotificationservice.configuration;
 
+import com.dimas.moexnotificationservice.model.DataFromAggregator;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -35,13 +36,13 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<Long, Object> consumerFactory(){
+    public ConsumerFactory<Long, DataFromAggregator<?>> consumerFactory(){
         return new DefaultKafkaConsumerFactory<>(this.consumerConfig());
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<Long, Object> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<Long, DataFromAggregator<?>> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<Long, DataFromAggregator<?>> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(this.consumerFactory());
 
         return factory;
