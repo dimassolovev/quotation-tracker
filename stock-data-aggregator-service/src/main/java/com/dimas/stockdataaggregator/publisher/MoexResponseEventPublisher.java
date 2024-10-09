@@ -1,22 +1,27 @@
 package com.dimas.stockdataaggregator.publisher;
 
-import com.dimas.stockdataaggregator.event.MoexResponseEvent;
+import com.dimas.stockdataaggregator.event.ResponseFromSourcesEvent;
 import com.dimas.stockdataaggregator.model.external.DataFromExternalServices;
 
-import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
+/**
+ * MoexResponseEvent Publisher Class
+ */
 @Component
 @RequiredArgsConstructor
 public class MoexResponseEventPublisher {
     private final ApplicationEventPublisher eventPublisher;
 
-    public void publishMoexResponseEvent(DataFromExternalServices<List<CurrencyData>> dataFromExternalServices) {
-        this.eventPublisher.publishEvent(new MoexResponseEvent(this, dataFromExternalServices));
+    /**
+     * The method publishes ResponseFromSourcesEvent.
+     * @param dataFromExternalServices data container
+     */
+    public void publishResponseFromSourcesEvent(DataFromExternalServices<?> dataFromExternalServices) {
+        this.eventPublisher.publishEvent(new ResponseFromSourcesEvent(this, dataFromExternalServices));
     }
 }

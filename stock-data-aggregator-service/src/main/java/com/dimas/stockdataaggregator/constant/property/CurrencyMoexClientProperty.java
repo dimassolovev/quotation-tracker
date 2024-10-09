@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Needed to configure query parameters in moex.
+ * All parameters are used in src/main/resources/application.yml
+ */
 @Component
 @Data
 @NoArgsConstructor

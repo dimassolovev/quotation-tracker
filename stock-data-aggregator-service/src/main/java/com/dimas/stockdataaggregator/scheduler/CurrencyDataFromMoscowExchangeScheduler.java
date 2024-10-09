@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+/**
+ * Planner for queries in moex
+ */
 @Component
 @EnableScheduling
 @RequiredArgsConstructor
@@ -21,7 +23,9 @@ public class CurrencyDataFromMoscowExchangeScheduler {
     private final CurrencyDataFromMoscowExchangeService currencyDataFromMoscowExchangeService;
     private final MoexResponseEventPublisher moexResponseEventPublisher;
 
-
+    /**
+     * The method requests data and publishes it to events.
+     */
 //    @Scheduled(cron = "${scheduler.currency-moex-client.cron-expression}")
     @Scheduled(fixedRate = 60000)
     public void poll() {
@@ -30,6 +34,6 @@ public class CurrencyDataFromMoscowExchangeScheduler {
 
         dataFromExternalServices.setData(currencyDataList);
 
-        this.moexResponseEventPublisher.publishMoexResponseEvent(dataFromExternalServices);
+        this.moexResponseEventPublisher.publishResponseFromSourcesEvent(dataFromExternalServices);
     }
 }

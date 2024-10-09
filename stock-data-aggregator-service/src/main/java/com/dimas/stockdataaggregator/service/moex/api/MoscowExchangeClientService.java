@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * Class for sending request and scraping.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
