@@ -14,7 +14,6 @@ public class QuotationController {
 
     @GetMapping("/test")
     public ResponseEntity<Void> test() {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build(); // saga pattern will be implemented here soon
     }
-
 }

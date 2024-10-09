@@ -4,7 +4,6 @@ import com.dimas.gatewayservice.constant.UriProperties;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class RouteValidator {
     private final UriProperties uriProperties;
 

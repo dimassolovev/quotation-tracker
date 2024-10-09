@@ -35,21 +35,23 @@ public class KafkaDataMessagePublisher {
                         dataFromExternalServices
                 );
 
-        try {
-            SendResult<Long, DataFromExternalServices<?>> result = sendResult.get();
-            RecordMetadata recordMetadata = result.getRecordMetadata();
-            log.info(
-                    String.format(
-                            "Sent data to the topic: %s. Partition: %s. OffSet %s. Timestamp: %s",
-                            recordMetadata.topic(),
-                            recordMetadata.partition(),
-                            recordMetadata.offset(),
-                            recordMetadata.timestamp()
-                    )
-            );
-
-        } catch (Exception exception) {
-            log.error(exception.getMessage(), exception);
-        }
+        sendResult.whenComplete(
+                (result, exception) -> {
+                    if (exception != null) {
+                        log.error(exception.getMessage(), exception);
+                        return;
+                    }
+                    RecordMetadata recordMetadata = result.getRecordMetadata();
+                    log.info(
+                            String.format(
+                                    "Sent data to the topic: %s. Partition: %s. OffSet %s. Timestamp: %s",
+                                    recordMetadata.topic(),
+                                    recordMetadata.partition(),
+                                    recordMetadata.offset(),
+                                    recordMetadata.timestamp()
+                            )
+                    );
+                }
+        );
     }
 }

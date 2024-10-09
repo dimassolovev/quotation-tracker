@@ -28,12 +28,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AuthenticationService {
+    private final UserCredentialsMapper userCredentialsMapper;
     private final UserCredentialsRepository userCredentialsRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final RoleService roleService;
-    private final UserCredentialsMapper userCredentialsMapper;
 
     @Transactional
     public void saveUser(AuthenticationRequest authenticationRequest) throws EntryException {
