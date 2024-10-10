@@ -6,6 +6,8 @@
     <file url="file://$PROJECT_DIR$/discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-client-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/moex-data-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/moex-data-service1/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/moex-notification-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
