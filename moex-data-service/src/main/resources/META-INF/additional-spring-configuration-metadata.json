@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "kafka.topic",
+      "type": "java.lang.String",
+      "description": "Description for kafka.topic."
+  }
+] }

@@ -5,6 +5,11 @@ spring:
   application:
     name: authentication-service
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: moex-data.currencies-1
+
   datasource:
     url: ${POSTGRES_URL}
     username: ${POSTGRES_USERNAME}
@@ -27,3 +32,6 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
         enable_lazy_load_no_trans: true
+
+kafka:
+  topic: quotation.moex-data.currencies

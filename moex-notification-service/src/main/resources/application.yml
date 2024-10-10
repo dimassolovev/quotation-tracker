@@ -5,7 +5,7 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: moex-data.currencies
+      group-id: moex-data.currencies-0
 
 #  mail:
 #    username: .  # Gmail
