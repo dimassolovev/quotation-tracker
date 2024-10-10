@@ -39,18 +39,13 @@ kafka:
   topic: "quotation.moex-data.currencies"
 
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
-  instance:
-    instance-id: ${random.uuid}
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
+#  instance:
+#    instance-id: ${random.uuid}
 
-authentication:
-  base-url: http://localhost:${API_GATEWAY_PORT}/authentication
-  token-endpoint: /token
-  validate-token-endpoint: /validate-token
-  register-endpoint: /register
 
 scheduler:
   currency-moex-client:

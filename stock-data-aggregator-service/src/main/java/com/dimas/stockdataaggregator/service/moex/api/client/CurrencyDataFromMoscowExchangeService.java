@@ -1,11 +1,13 @@
 package com.dimas.stockdataaggregator.service.moex.api.client;
 
 import com.dimas.stockdataaggregator.constant.property.CurrencyMoexClientProperty;
+import com.dimas.stockdataaggregator.exception.ParseObjectException;
 import com.dimas.stockdataaggregator.model.external.moex.currency.CurrencyData;
 import com.dimas.stockdataaggregator.service.moex.api.MoscowExchangeClientService;
 
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ import java.util.List;
  * A class that is guaranteed to receive non-empty, up-to-date data.
  */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class CurrencyDataFromMoscowExchangeService {
     private final CurrencyMoexClientProperty currencyMoexClientProperty;
@@ -29,18 +32,24 @@ public class CurrencyDataFromMoscowExchangeService {
         List<CurrencyData> currencyDataList = new ArrayList<>();
 
         for (String security : this.currencyMoexClientProperty.getSecurities()) {
-            CurrencyData currencyData;
+            CurrencyData currencyData = null;
 
             do {
-                currencyData = moscowExchangeClientService.getCurrency(
-                        String.format("%s/RUB", security),
-                        pastDate,
-                        currentDate,
-                        this.currencyMoexClientProperty.getMetaMode(),
-                        this.currencyMoexClientProperty.getChoice(),
-                        this.currencyMoexClientProperty.getLimit(),
-                        this.currencyMoexClientProperty.getStringOrder()
-                );
+                try {
+                    currencyData = moscowExchangeClientService.getCurrency(
+                            String.format("%s/RUB", security),
+                            pastDate,
+                            currentDate,
+                            this.currencyMoexClientProperty.getMetaMode(),
+                            this.currencyMoexClientProperty.getChoice(),
+                            this.currencyMoexClientProperty.getLimit(),
+                            this.currencyMoexClientProperty.getStringOrder()
+                    );
+                }
+                catch (ParseObjectException exception) {
+                    log.error(exception.getMessage(), exception);
+                    break;
+                }
 
                 currentDate = LocalDate.parse(currentDate, this.dateTimeFormatter).minusDays(1).format(this.dateTimeFormatter);
             }
