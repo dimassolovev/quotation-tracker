@@ -46,6 +46,16 @@ kafka:
 #  instance:
 #    instance-id: ${random.uuid}
 
+management:
+  endpoints.web.exposure.include: "prometheus, health"
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 
 scheduler:
   currency-moex-client:
