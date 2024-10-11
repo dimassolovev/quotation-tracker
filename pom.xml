@@ -110,7 +110,7 @@
         <module>gateway-service</module>
         <module>config-service</module>
         <module>authentication-service</module>
-        <module>stock-data-aggregator-service</module>
+        <module>quotation-data-aggregator-service</module>
     </modules>
 
 </project>

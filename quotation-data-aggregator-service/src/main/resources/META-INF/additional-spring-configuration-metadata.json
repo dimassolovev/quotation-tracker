@@ -1,0 +1,43 @@
+{
+  "properties": [
+    {
+      "name": "scheduler.currency-moex-client.cron-expression",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.cron-expression."
+    },
+    {
+      "name": "scheduler.currency-moex-client.limit",
+      "type": "java.lang.Integer",
+      "description": "Description for scheduler.currency-moex-client.limit."
+    },
+    {
+      "name": "scheduler.currency-moex-client.securities",
+      "type": "java.util.List",
+      "description": "Description for scheduler.currency-moex-client.securities."
+    },
+    {
+      "name": "scheduler.currency-moex-client.meta-mode",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.meta-mode."
+    },
+    {
+      "name": "scheduler.currency-moex-client.choice",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.choice."
+    },
+    {
+      "name": "scheduler.currency-moex-client.string-order",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.string-order."
+    },
+    {
+      "name": "kafka.topic",
+      "type": "java.lang.String",
+      "description": "Description for kafka.topic."
+    },
+    {
+      "name": "kafka.retention",
+      "type": "java.lang.Integer",
+      "description": "Description for kafka.retention."
+    }
+  ] }
