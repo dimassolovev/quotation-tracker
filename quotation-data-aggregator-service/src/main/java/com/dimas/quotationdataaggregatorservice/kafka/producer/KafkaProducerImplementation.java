@@ -11,6 +11,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -18,12 +20,14 @@ import java.util.concurrent.CompletableFuture;
 @Component
 @RequiredArgsConstructor
 public class KafkaProducerImplementation implements KafkaProducer<DataFromExternalServices<?>> {
-    private final KafkaTemplate<Long, DataFromExternalServices<?>> kafkaTemplate;
+    private final KafkaTemplate<String, DataFromExternalServices<?>> kafkaTemplate;
+    private final DateTimeFormatter dateTimeFormatter;
 
     public void sendMessage(DataFromExternalServices<?> dataFromExternalServices, String topicName) {
-        CompletableFuture<SendResult<Long, DataFromExternalServices<?>>> sendResult = this.kafkaTemplate
+        CompletableFuture<SendResult<String, DataFromExternalServices<?>>> sendResult = this.kafkaTemplate
                 .send(
                         topicName,
+                        LocalDateTime.now().format(dateTimeFormatter),
                         dataFromExternalServices
                 );
 

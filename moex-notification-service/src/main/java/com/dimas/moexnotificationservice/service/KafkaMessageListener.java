@@ -5,6 +5,7 @@ import com.dimas.moexnotificationservice.model.currency.DataFromAggregator;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,13 +25,15 @@ public class KafkaMessageListener {
 
     @KafkaListener(topics = "${kafka.topic}", groupId = "${spring.kafka.consumer.group-id}")
     public void onMessage(ConsumerRecord<Long, String> consumerRecord) {
-        log.info("Received data from topic {}: {} ", consumerRecord.topic(), consumerRecord.value());
+        log.info("Received data from topic {}, timestamp: {}", consumerRecord.topic(), consumerRecord.key());
+
         try {
-            DataFromAggregator dataFromAggregator = objectMapper.readValue(consumerRecord.value(), DataFromAggregator.class);
-            System.out.println(dataFromAggregator.getData());
+            DataFromAggregator<List<CurrencyData>> dataFromAggregator = objectMapper.readValue(consumerRecord.value(), new TypeReference<>() {});
         }
-        catch (Exception e) {
-            e.printStackTrace();
+
+
+        catch (Exception exception) {
+            log.error(exception.getMessage(), exception);
         }
     }
 }

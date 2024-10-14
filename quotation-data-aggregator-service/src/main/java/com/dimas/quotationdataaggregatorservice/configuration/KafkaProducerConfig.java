@@ -10,8 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.TopicConfig;
-import org.apache.kafka.common.serialization.LongSerializer;
 
+
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,18 +46,18 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<Long, DataFromExternalServices<?>> producerFactory() {
+    public ProducerFactory<String, DataFromExternalServices<?>> producerFactory() {
 
 
         return new DefaultKafkaProducerFactory<>(
                 this.producerConfig(),
-                new LongSerializer(),
+                new StringSerializer(),
                 new JsonSerializer<>(objectMapper)
         );
     }
 
     @Bean
-    public KafkaTemplate<Long, DataFromExternalServices<?>> kafkaTemplate() {
+    public KafkaTemplate<String, DataFromExternalServices<?>> kafkaTemplate() {
         return new KafkaTemplate<>(this.producerFactory());
     }
 
