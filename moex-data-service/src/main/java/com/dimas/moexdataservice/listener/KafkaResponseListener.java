@@ -1,0 +1,18 @@
+package com.dimas.moexdataservice.listener;
+
+import com.dimas.moexdataservice.event.ResponseFromKafka;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+@Slf4j
+public class KafkaResponseListener {
+    @EventListener
+    public void handleMoexResponse(ResponseFromKafka event) {
+        log.info("Received response from kafka: {}", event.getDataFromAggregator());
+    }
+}
