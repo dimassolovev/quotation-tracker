@@ -1,8 +1,9 @@
 package com.dimas.quotationdataaggregatorservice.listener;
 
+import com.dimas.quotationdataaggregatorservice.constant.property.KafkaConfigurationProperty;
 import com.dimas.quotationdataaggregatorservice.event.ResponseFromSourcesEvent;
-import com.dimas.quotationdataaggregatorservice.kafka.producer.KafkaDataMessagePublisher;
 
+import com.dimas.quotationdataaggregatorservice.kafka.producer.KafkaProducerImplementation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class ResponseFromSourcesEventListener {
-    private final KafkaDataMessagePublisher kafkaCurrencyDataMessagePublisher;
+    private final KafkaProducerImplementation kafkaProducer;
+    private final KafkaConfigurationProperty kafkaConfigurationProperty;
 
     /**
      * The method listens for event and immediately sends data to kafka.
@@ -25,8 +27,9 @@ public class ResponseFromSourcesEventListener {
     @EventListener
     public void handleMoexResponse(ResponseFromSourcesEvent event) {
         try {
-            this.kafkaCurrencyDataMessagePublisher.sendMessage(
-                    event.getDataFromExternalServices()
+            this.kafkaProducer.sendMessage(
+                    event.getDataFromExternalServices(),
+                    kafkaConfigurationProperty.getTopic()
             );
         } catch (Exception e) {
             log.error(e.getMessage(), e);

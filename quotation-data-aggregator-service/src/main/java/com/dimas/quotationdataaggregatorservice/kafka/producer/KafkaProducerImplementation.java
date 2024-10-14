@@ -1,6 +1,5 @@
 package com.dimas.quotationdataaggregatorservice.kafka.producer;
 
-import com.dimas.quotationdataaggregatorservice.constant.property.KafkaConfigurationProperty;
 import com.dimas.quotationdataaggregatorservice.model.external.DataFromExternalServices;
 
 import lombok.RequiredArgsConstructor;
@@ -14,24 +13,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
 
-/**
- * A publisher that puts data into kafka.
- */
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class KafkaDataMessagePublisher {
+public class KafkaProducerImplementation implements KafkaProducer<DataFromExternalServices<?>> {
     private final KafkaTemplate<Long, DataFromExternalServices<?>> kafkaTemplate;
-    private final KafkaConfigurationProperty kafkaConfigurationProperty;
 
-    /**
-     * It is needed so that other services can be integrated in addition to moex.
-     * @param dataFromExternalServices a container in which anything can be stored.
-     */
-    public void sendMessage(DataFromExternalServices<?>  dataFromExternalServices) {
+    public void sendMessage(DataFromExternalServices<?> dataFromExternalServices, String topicName) {
         CompletableFuture<SendResult<Long, DataFromExternalServices<?>>> sendResult = this.kafkaTemplate
                 .send(
-                        this.kafkaConfigurationProperty.getTopic(),
+                        topicName,
                         dataFromExternalServices
                 );
 

@@ -6,26 +6,7 @@ spring:
     name: quotation-data-aggregator-service
 
   kafka:
-    bootstrap-servers: localhost:9092                                                # Адреса Kafka брокеров
-    properties:
-      num.partitions: 3                                                              # Количество партиций по умолчанию
-      default.replication.factor: 3                                                  # Фактор репликации
-      min.insync.replicas: 2                                                         # Минимальная количество реплик в синхронизации
-      log.retention.hours: 168                                                       # Время хранения логов в часах
-      log.cleanup.policy: compact                                                    # Политика очистки логов
-      delete.retention.ms: 86400000                                                  # Время хранения удаленных сообщений
-      connections.max.idle.ms: 10000                                                 # Максимальное время простоя соединения
-      security.inter.broker.protocol: PLAINTEXT                                      # Протокол для связи между брокерами
-
-    producer:
-      acks: all                                                                      # Все реплики должны подтвердить запись
-      retries: 3                                                                     # Количество повторных попыток при неудаче
-      properties:
-        linger.ms: 5                                                                 # Задержка перед отправкой сообщений
-        batch.size: 16384                                                            # Размер партии сообщений
-        buffer.memory: 33554432                                                      # Максимальный размер памяти для буфера сообщений (32 МБ)
-        enable.idempotence: true                                                     # Включение идемпотентности для предотвращения дублирования
-        spring.json.trusted.packages: "com.dimas.quotationdataaggregator.model"          # Доверенные пакеты для сериализации
+    bootstrap-servers: localhost:9092
 
   cloud:
     openfeign:
@@ -60,16 +41,16 @@ management:
 scheduler:
   currency-moex-client:
     cron-expression: "0 0 18 * * *"
-    limit: 100
+    limit: 10
     securities:
-      - "GBP"
+#      - "GBP"
       - "USD"
-      - "EUR"
-      - "CAD"
-      - "CHF"
-      - "KZT"
-      - "JPY"
-      - "CNY"
+#      - "EUR"
+#      - "CAD"
+#      - "CHF"
+#      - "KZT"
+#      - "JPY"
+#      - "CNY"
     meta-mode: "on"
     choice:
     string-order:

@@ -3,6 +3,8 @@ package com.dimas.quotationdataaggregatorservice.configuration;
 import com.dimas.quotationdataaggregatorservice.constant.property.KafkaConfigurationProperty;
 import com.dimas.quotationdataaggregatorservice.model.external.DataFromExternalServices;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 
 import org.apache.kafka.clients.admin.NewTopic;
@@ -32,17 +34,25 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
+    private final ObjectMapper objectMapper;
+
+    @Bean
+    public Map<String, Object> producerConfig() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
+
+        return props;
+    }
+
     @Bean
     public ProducerFactory<Long, DataFromExternalServices<?>> producerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
 
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-        configProps.put(ProducerConfig.ACKS_CONFIG, "all");
 
-        return new DefaultKafkaProducerFactory<>(configProps);
+        return new DefaultKafkaProducerFactory<>(
+                this.producerConfig(),
+                new LongSerializer(),
+                new JsonSerializer<>(objectMapper)
+        );
     }
 
     @Bean

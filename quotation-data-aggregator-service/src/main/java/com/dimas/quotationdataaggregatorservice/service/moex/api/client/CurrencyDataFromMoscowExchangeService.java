@@ -15,9 +15,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A class that is guaranteed to receive non-empty, up-to-date data.
- */
 @Service
 @Slf4j
 @RequiredArgsConstructor

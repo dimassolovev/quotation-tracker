@@ -1,6 +1,7 @@
 package com.dimas.moexdataservice.configuration;
 
-import com.dimas.moexdataservice.model.kafka.DataFromAggregator;
+
+import com.dimas.moexdataservice.model.kafka.currency.MoexCurrencyDataFromAggregator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +14,7 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
@@ -30,20 +32,23 @@ public class KafkaConsumerConfig {
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, this.bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(JsonDeserializer.TRUSTED_PACKAGES, "com.dimas.moexnotificationservice.model");
+
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+        props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
+
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "com.dimas.moexdataservice.model.kafka");
 
         return props;
     }
 
     @Bean
-    public ConsumerFactory<Long, DataFromAggregator<?>> consumerFactory(){
+    public ConsumerFactory<Long, Object> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(this.consumerConfig());
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<Long, DataFromAggregator<?>> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, DataFromAggregator<?>> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<Long, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<Long, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(this.consumerFactory());
 
         return factory;
