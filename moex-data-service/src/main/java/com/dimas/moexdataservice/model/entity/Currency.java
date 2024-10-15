@@ -20,11 +20,8 @@ public class Currency {
     @Column(name = "id")
     Integer id;
 
-    @Column(name = "tradedate")
-    LocalDate tradedate;
-
-    @Column(name = "tradetime")
-    LocalTime tradetime;
+    @Column(name = "trade_timestamp")
+    Long tradeTimestamp;
 
     @Column(name = "rate")
     Double rate;

@@ -41,16 +41,16 @@ management:
 scheduler:
   currency-moex-client:
     cron-expression: "0 0 18 * * *"
-    limit: 10
+    limit: 100
     securities:
-#      - "GBP"
+      - "GBP"
       - "USD"
       - "EUR"
-#      - "CAD"
-#      - "CHF"
-#      - "KZT"
-#      - "JPY"
-#      - "CNY"
+      - "CAD"
+      - "CHF"
+      - "KZT"
+      - "JPY"
+      - "CNY"
     meta-mode: "on"
     choice:
     string-order:

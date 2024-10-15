@@ -9,14 +9,16 @@ import com.dimas.moexdataservice.repository.ClearingTypeRepository;
 import com.dimas.moexdataservice.repository.CurrencyRepository;
 import com.dimas.moexdataservice.repository.SecurityRepository;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,12 +28,36 @@ public class CurrencyService {
     private final SecurityRepository securityRepository;
     private final CurrencyRepository currencyRepository;
 
+    private Map<String, ClearingType> clearingTypeMap;
+    private Map<String, Security> securityMap;
+
+
+    @PostConstruct
+    public void init() {
+        this.clearingTypeMap = this.clearingTypeRepository
+                .findAll()
+                .stream()
+                .collect(
+                        Collectors.toMap(
+                                ClearingType::getClearing,
+                                clearingType -> clearingType
+                        )
+                );
+
+        this.securityMap = this.securityRepository
+                .findAll()
+                .stream()
+                .collect(
+                        Collectors.toMap(
+                                Security::getPairCode,
+                                security -> security
+                        )
+                );
+    }
+
     @Transactional
     public void saveCurrencyDataList(List<CurrencyData> currencyDataList) {
         List<Currency> currencies = new ArrayList<>();
-
-        Map<String, ClearingType> clearingTypeMap = new HashMap<>();
-        Map<String, Security> securityMap = new HashMap<>();
 
 
         for (CurrencyData currencyData : currencyDataList) {
@@ -39,31 +65,47 @@ public class CurrencyService {
             for (SecurityData securityData : currencyData.getSecurities()) {
                 Currency currency = new Currency();
 
-                if (!clearingTypeMap.containsKey(securityData.getClearing()))
-                    clearingTypeMap.put(
+                if (!this.clearingTypeMap.containsKey(securityData.getClearing()))
+                    this.clearingTypeMap.put(
                             securityData.getClearing(), this.clearingTypeRepository.findByClearing(securityData.getClearing())
                     );
 
 
-                if (!securityMap.containsKey(securityData.getSecid()))
-                    securityMap.put(
+                if (!this.securityMap.containsKey(securityData.getSecid()))
+                    this.securityMap.put(
                             securityData.getSecid(), this.securityRepository.findByPairCode(securityData.getSecid())
                     );
 
-                currency.setSecurity(securityMap.get(securityData.getSecid()));
-                currency.setClearingType(clearingTypeMap.get(securityData.getClearing()));
-                currency.setTradedate(LocalDate.parse(securityData.getTradedate()));
-                currency.setTradetime(LocalTime.parse(securityData.getTradetime()));
+                currency.setSecurity(this.securityMap.get(securityData.getSecid()));
+                currency.setClearingType(this.clearingTypeMap.get(securityData.getClearing()));
+                currency.setTradeTimestamp(
+                        LocalDateTime.parse(
+                                String.format(
+                                        "%sT%s",
+                                        securityData.getTradedate(),
+                                        securityData.getTradetime()
+                                )
+                        )
+                                .toEpochSecond(ZoneOffset.UTC)
+                );
                 currency.setRate(securityData.getRate());
 
                 currencies.add(currency);
             }
 
             Currency currency = new Currency();
-            currency.setSecurity(securityMap.get(currencyData.getCurrent().getSecid()));
+            currency.setSecurity(this.securityMap.get(currencyData.getCurrent().getSecid()));
             currency.setClearingType(this.clearingTypeRepository.findByClearing("nn"));
-            currency.setTradedate(LocalDate.parse(currencyData.getCurrent().getTradedate()));
-            currency.setTradetime(LocalTime.parse(currencyData.getCurrent().getTradetime()));
+            currency.setTradeTimestamp(
+                    LocalDateTime.parse(
+                                    String.format(
+                                            "%sT%s",
+                                            currencyData.getCurrent().getTradedate(),
+                                            currencyData.getCurrent().getTradetime()
+                                    )
+                            )
+                            .toEpochSecond(ZoneOffset.UTC)
+            );
             currency.setRate(currencyData.getCurrent().getRate());
 
             currencies.add(currency);
