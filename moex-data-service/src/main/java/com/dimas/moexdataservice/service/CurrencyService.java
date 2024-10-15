@@ -58,6 +58,15 @@ public class CurrencyService {
 
                 currencies.add(currency);
             }
+
+            Currency currency = new Currency();
+            currency.setSecurity(securityMap.get(currencyData.getCurrent().getSecid()));
+            currency.setClearingType(this.clearingTypeRepository.findByClearing("nn"));
+            currency.setTradedate(LocalDate.parse(currencyData.getCurrent().getTradedate()));
+            currency.setTradetime(LocalTime.parse(currencyData.getCurrent().getTradetime()));
+            currency.setRate(currencyData.getCurrent().getRate());
+
+            currencies.add(currency);
         }
 
         this.currencyRepository.saveAll(currencies);
