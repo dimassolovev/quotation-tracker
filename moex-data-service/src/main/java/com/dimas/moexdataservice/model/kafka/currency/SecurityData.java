@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Security {
+public class SecurityData {
     @JsonProperty("tradedate")
     String tradedate;
     @JsonProperty("tradetime")

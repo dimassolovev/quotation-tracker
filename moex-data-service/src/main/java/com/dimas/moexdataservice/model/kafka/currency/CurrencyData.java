@@ -15,7 +15,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CurrencyData {
     @JsonProperty("securities")
-    List<Security> securities;
+    List<SecurityData> securities;
     @JsonProperty("current")
-    Current current;
+    CurrentData current;
 }

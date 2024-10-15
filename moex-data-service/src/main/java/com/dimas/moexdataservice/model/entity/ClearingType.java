@@ -23,5 +23,5 @@ public class ClearingType {
     String clearing;
 
     @OneToMany(mappedBy = "clearingType")
-    List<CurrencyData> currencyDataList;
+    List<Currency> currencyDataList;
 }

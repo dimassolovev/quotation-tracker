@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CurrencyData {
+public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,9 +25,6 @@ public class CurrencyData {
 
     @Column(name = "tradetime")
     LocalTime tradetime;
-
-    @Column(name = "secid")
-    String secid;
 
     @Column(name = "rate")
     Double rate;

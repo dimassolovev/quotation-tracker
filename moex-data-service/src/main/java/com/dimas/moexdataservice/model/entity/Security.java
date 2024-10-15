@@ -23,5 +23,5 @@ public class Security {
     String pairCode;
 
     @OneToMany(mappedBy = "security")
-    List<CurrencyData> currencyDataList;
+    List<Currency> currencyDataList;
 }
