@@ -33,5 +33,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         enable_lazy_load_no_trans: true
 
+        jdbc:
+          batch_size: 150
+        generate_statistics: true
+        order_updates: true
+
 kafka:
   topic: quotation.moex-data.currencies

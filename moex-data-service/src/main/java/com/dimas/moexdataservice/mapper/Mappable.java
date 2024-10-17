@@ -1,6 +1,5 @@
 package com.dimas.moexdataservice.mapper;
 
-public interface Mappable<E, D>{
-    E toEntity(D dto);
+public interface Mappable<E, D> extends EntityMappable<E, D> {
     D toDto(E entity);
 }

@@ -1,5 +1,7 @@
 package com.dimas.moexdataservice.service;
 
+import com.dimas.moexdataservice.mapper.CurrentDataMapper;
+import com.dimas.moexdataservice.mapper.SecurityDataMapper;
 import com.dimas.moexdataservice.model.entity.ClearingType;
 import com.dimas.moexdataservice.model.entity.Currency;
 import com.dimas.moexdataservice.model.entity.Security;
@@ -15,8 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,13 +28,13 @@ public class CurrencyService {
     private final SecurityRepository securityRepository;
     private final CurrencyRepository currencyRepository;
 
-    private Map<String, ClearingType> clearingTypeMap;
-    private Map<String, Security> securityMap;
+    private final SecurityDataMapper securityDataMapper;
+    private final CurrentDataMapper currentDataMapper;
 
 
     @PostConstruct
     public void init() {
-        this.clearingTypeMap = this.clearingTypeRepository
+        Map<String, ClearingType> clearingTypeMap = this.clearingTypeRepository
                 .findAll()
                 .stream()
                 .collect(
@@ -44,7 +44,7 @@ public class CurrencyService {
                         )
                 );
 
-        this.securityMap = this.securityRepository
+        Map<String, Security> securityMap = this.securityRepository
                 .findAll()
                 .stream()
                 .collect(
@@ -53,6 +53,11 @@ public class CurrencyService {
                                 security -> security
                         )
                 );
+
+        this.securityDataMapper.setSecurityMap(securityMap);
+        this.securityDataMapper.setClearingTypeMap(clearingTypeMap);
+        this.currentDataMapper.setSecurityMap(securityMap);
+        this.currentDataMapper.setClearingTypeMap(clearingTypeMap);
     }
 
     @Transactional
@@ -63,51 +68,11 @@ public class CurrencyService {
         for (CurrencyData currencyData : currencyDataList) {
 
             for (SecurityData securityData : currencyData.getSecurities()) {
-                Currency currency = new Currency();
-
-                if (!this.clearingTypeMap.containsKey(securityData.getClearing()))
-                    this.clearingTypeMap.put(
-                            securityData.getClearing(), this.clearingTypeRepository.findByClearing(securityData.getClearing())
-                    );
-
-
-                if (!this.securityMap.containsKey(securityData.getSecid()))
-                    this.securityMap.put(
-                            securityData.getSecid(), this.securityRepository.findByPairCode(securityData.getSecid())
-                    );
-
-                currency.setSecurity(this.securityMap.get(securityData.getSecid()));
-                currency.setClearingType(this.clearingTypeMap.get(securityData.getClearing()));
-                currency.setTradeTimestamp(
-                        LocalDateTime.parse(
-                                String.format(
-                                        "%sT%s",
-                                        securityData.getTradedate(),
-                                        securityData.getTradetime()
-                                )
-                        )
-                                .toEpochSecond(ZoneOffset.UTC)
-                );
-                currency.setRate(securityData.getRate());
-
+                Currency currency = this.securityDataMapper.toEntity(securityData);
                 currencies.add(currency);
             }
 
-            Currency currency = new Currency();
-            currency.setSecurity(this.securityMap.get(currencyData.getCurrent().getSecid()));
-            currency.setClearingType(this.clearingTypeRepository.findByClearing("nn"));
-            currency.setTradeTimestamp(
-                    LocalDateTime.parse(
-                                    String.format(
-                                            "%sT%s",
-                                            currencyData.getCurrent().getTradedate(),
-                                            currencyData.getCurrent().getTradetime()
-                                    )
-                            )
-                            .toEpochSecond(ZoneOffset.UTC)
-            );
-            currency.setRate(currencyData.getCurrent().getRate());
-
+            Currency currency = this.currentDataMapper.toEntity(currencyData.getCurrent());
             currencies.add(currency);
         }
 
