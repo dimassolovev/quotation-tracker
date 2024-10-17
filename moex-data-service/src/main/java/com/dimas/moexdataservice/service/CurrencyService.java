@@ -12,6 +12,7 @@ import com.dimas.moexdataservice.repository.CurrencyRepository;
 import com.dimas.moexdataservice.repository.SecurityRepository;
 
 import jakarta.annotation.PostConstruct;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;

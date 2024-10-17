@@ -34,7 +34,7 @@ spring:
         enable_lazy_load_no_trans: true
 
         jdbc:
-          batch_size: 150
+          batch_size: 110
         generate_statistics: true
         order_updates: true
 

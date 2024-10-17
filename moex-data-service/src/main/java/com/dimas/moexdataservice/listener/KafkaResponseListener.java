@@ -1,8 +1,8 @@
 package com.dimas.moexdataservice.listener;
 
 import com.dimas.moexdataservice.event.ResponseFromKafka;
-
 import com.dimas.moexdataservice.service.CurrencyService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
