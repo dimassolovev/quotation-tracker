@@ -2,6 +2,7 @@ version: "3.1"
 
 volumes:
   authentication-db:
+  redis-cache:
 
 services:
   authentication-db:
@@ -25,7 +26,7 @@ services:
     networks:
       - kafka-net
 
-  cache:
+  redis-cache:
     image: redis:latest
     ports:
       - "6379:6379"
@@ -33,7 +34,7 @@ services:
       - ${REDIS_USER}
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     volumes:
-      - ./redisdata:/data
+      - redis-cache:/var/lib/redis/data
 
   kafka:
     image: wurstmeister/kafka
