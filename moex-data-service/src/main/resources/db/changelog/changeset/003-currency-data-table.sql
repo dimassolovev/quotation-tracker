@@ -9,7 +9,8 @@ CREATE SEQUENCE currency_data_id_seq
 -- table
 CREATE TABLE IF NOT EXISTS currency_data (
     id BIGINT PRIMARY KEY,
-    trade_timestamp BIGINT NOT NULL,
+    trade_date DATE NOT NULL,
+    trade_time TIME NOT NULL,
     rate REAL NOT NULL,
     security_id INT NOT NULL,
     clearing_type_id INT NOT NULL,

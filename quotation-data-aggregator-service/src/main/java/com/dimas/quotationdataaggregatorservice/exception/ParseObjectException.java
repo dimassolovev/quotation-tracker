@@ -4,7 +4,7 @@ import com.dimas.quotationdataaggregatorservice.constant.Message;
 import lombok.Getter;
 
 @Getter
-public class ParseObjectException extends RuntimeException{
+public class ParseObjectException extends RuntimeException {
     private final String message;
 
     public ParseObjectException(Message message) {

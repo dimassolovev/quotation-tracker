@@ -3,7 +3,13 @@ server:
 
 spring:
   application:
-    name: authentication-service
+    name: moex-data-service
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 86400
+      cache-null-values: false
 
   kafka:
     bootstrap-servers: localhost:9092
@@ -40,3 +46,7 @@ spring:
 
 kafka:
   topic: quotation.moex-data.currencies
+
+other:
+  currency:
+    related_path: "api/v1/currency/"

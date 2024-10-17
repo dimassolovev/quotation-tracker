@@ -1,6 +1,5 @@
 package com.dimas.moexdataservice.model.kafka.currency;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,12 +11,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CurrentData {
-    @JsonProperty("secid")
     String secid;
-    @JsonProperty("tradedate")
     String tradedate;
-    @JsonProperty("tradetime")
     String tradetime;
-    @JsonProperty("rate")
     Double rate;
 }

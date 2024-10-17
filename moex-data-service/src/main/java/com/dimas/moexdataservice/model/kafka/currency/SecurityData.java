@@ -1,7 +1,5 @@
 package com.dimas.moexdataservice.model.kafka.currency;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +11,9 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SecurityData {
-    @JsonProperty("tradedate")
     String tradedate;
-    @JsonProperty("tradetime")
     String tradetime;
-    @JsonProperty("secid")
     String secid;
-    @JsonProperty("rate")
     Double rate;
-    @JsonProperty("clearing")
     String clearing;
 }

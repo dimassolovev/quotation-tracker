@@ -1,4 +1,4 @@
-package com.dimas.moexdataservice.model.entity;
+package com.dimas.moexdataservice.model.entity.currency;
 
 import jakarta.persistence.*;
 

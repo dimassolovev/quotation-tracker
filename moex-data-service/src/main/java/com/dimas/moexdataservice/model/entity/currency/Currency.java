@@ -1,4 +1,4 @@
-package com.dimas.moexdataservice.model.entity;
+package com.dimas.moexdataservice.model.entity.currency;
 
 import jakarta.persistence.*;
 
@@ -21,8 +21,11 @@ public class Currency {
     @Column(name = "id")
     Integer id;
 
-    @Column(name = "trade_timestamp")
-    Long tradeTimestamp;
+    @Column(name = "trade_date")
+    LocalDate tradeDate;
+
+    @Column(name = "trade_time")
+    LocalTime tradeTime;
 
     @Column(name = "rate")
     Double rate;

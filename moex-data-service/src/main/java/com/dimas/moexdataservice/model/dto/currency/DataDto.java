@@ -1,4 +1,4 @@
-package com.dimas.moexdataservice.model.kafka.currency;
+package com.dimas.moexdataservice.model.dto.currency;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DataFromAggregator<T>  {
-    T data;
+public class DataDto<T>{
+    private T data;
 }

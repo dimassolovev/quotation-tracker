@@ -1,16 +1,17 @@
-package com.dimas.moexdataservice.mapper;
+package com.dimas.moexdataservice.mapper.kafka;
 
-import com.dimas.moexdataservice.model.entity.ClearingType;
-import com.dimas.moexdataservice.model.entity.Currency;
-import com.dimas.moexdataservice.model.entity.Security;
+import com.dimas.moexdataservice.mapper.EntityMappable;
+import com.dimas.moexdataservice.model.entity.currency.ClearingType;
+import com.dimas.moexdataservice.model.entity.currency.Currency;
+import com.dimas.moexdataservice.model.entity.currency.Security;
 import com.dimas.moexdataservice.model.kafka.currency.SecurityData;
 
 import lombok.Setter;
 
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Map;
 
 
@@ -27,16 +28,8 @@ public class SecurityDataMapper implements EntityMappable<Currency, SecurityData
 
         currency.setSecurity(this.securityMap.get(dto.getSecid()));
         currency.setClearingType(this.clearingTypeMap.get(dto.getClearing()));
-        currency.setTradeTimestamp(
-                LocalDateTime.parse(
-                                String.format(
-                                        "%sT%s",
-                                        dto.getTradedate(),
-                                        dto.getTradetime()
-                                )
-                        )
-                        .toEpochSecond(ZoneOffset.UTC)
-        );
+        currency.setTradeTime(LocalTime.parse(dto.getTradetime()));
+        currency.setTradeDate(LocalDate.parse(dto.getTradedate()));
         currency.setRate(dto.getRate());
 
         return currency;
