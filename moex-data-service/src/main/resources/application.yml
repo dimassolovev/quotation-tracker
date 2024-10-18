@@ -40,9 +40,10 @@ spring:
         enable_lazy_load_no_trans: true
 
         jdbc:
-          batch_size: 110
+          batch_size: 45
         generate_statistics: true
         order_updates: true
+
 
 kafka:
   topic: quotation.moex-data.currencies

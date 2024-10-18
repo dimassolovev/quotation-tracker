@@ -25,12 +25,11 @@ public class CurrencyDataFromMoscowExchangeService {
 
     public List<CurrencyData> getCurrencyData() {
         String currentDate = LocalDate.now().format(this.dateTimeFormatter);
-        String pastDate = LocalDate.parse(currentDate, this.dateTimeFormatter).minusDays(10).format(this.dateTimeFormatter);
+        String pastDate = LocalDate.parse(currentDate, this.dateTimeFormatter).minusDays(6).format(this.dateTimeFormatter);
         List<CurrencyData> currencyDataList = new ArrayList<>();
 
         for (String security : this.currencyMoexClientProperty.getSecurities()) {
             CurrencyData currencyData = null;
-
             do {
                 try {
                     currencyData = moscowExchangeClientService.getCurrency(

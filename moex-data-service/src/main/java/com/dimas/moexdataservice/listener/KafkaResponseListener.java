@@ -18,7 +18,7 @@ public class KafkaResponseListener {
     @EventListener
     public void handleMoexResponse(ResponseFromKafka event) {
         log.info("Received response from kafka: {}", event.getDataFromAggregator());
-        this.currencyService.saveCurrencyDataList(
+        this.currencyService.save(
                 event.getDataFromAggregator().getData()
         );
     }

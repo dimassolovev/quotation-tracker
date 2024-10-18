@@ -1,11 +1,8 @@
 version: "3.1"
 
-volumes:
-  authentication-db:
-  redis-cache:
 
 services:
-  authentication-db:
+  postgres-db:
     container_name: postgres
     image: postgres:14
     restart: always
@@ -16,7 +13,9 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
-      - authentication-db:/var/lib/postgresql/data
+      - postgres-db:/var/lib/postgresql/data
+    networks:
+      - postgres-net
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -49,6 +48,12 @@ services:
     networks:
       - kafka-net
 
+volumes:
+  postgres-db:
+  redis-cache:
+
 networks:
   kafka-net:
+    driver: bridge
+  postgres-net:
     driver: bridge

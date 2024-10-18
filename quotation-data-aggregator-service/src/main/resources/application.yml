@@ -40,7 +40,7 @@ management:
 
 scheduler:
   currency-moex-client:
-    cron-expression: "0 0 18 * * *"
+    cron-expression: "0 0 18 * * SUN"
     limit: 100
     securities:
       - "GBP"

@@ -2,6 +2,7 @@ package com.dimas.moexdataservice.service;
 
 import com.dimas.moexdataservice.constant.Message;
 import com.dimas.moexdataservice.exception.CurrencyNotFoundByDateException;
+import com.dimas.moexdataservice.exception.IncorrectDateFormat;
 import com.dimas.moexdataservice.mapper.dto.CurrencyDataDtoMapper;
 import com.dimas.moexdataservice.mapper.kafka.CurrentDataMapper;
 import com.dimas.moexdataservice.mapper.kafka.SecurityDataMapper;
@@ -33,9 +34,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CurrencyService {
     // batch insert чтобы не повторялись строки
-    // кэширование
-    // валидация даты
-    // чтение кода
     private final ClearingTypeRepository clearingTypeRepository;
     private final SecurityRepository securityRepository;
     private final CurrencyRepository currencyRepository;
@@ -74,7 +72,7 @@ public class CurrencyService {
     }
 
     @Transactional
-    public void saveCurrencyDataList(List<CurrencyData> currencyDataList) {
+    public void save(List<CurrencyData> currencyDataList) {
         List<Currency> currencies = new ArrayList<>();
 
         for (CurrencyData currencyData : currencyDataList) {
@@ -91,17 +89,27 @@ public class CurrencyService {
         this.currencyRepository.saveAll(currencies);
     }
 
-    @Cacheable("currency_moex_data")
-    public DataDto<List<CurrencyDataDto>> findAllByDate(String date) {
-        // должна быть валидация
-        LocalDate localDate = LocalDate.parse(date);
-        Optional<List<Currency>> currencies = this.currencyRepository.findByTradeDate(localDate);
+    @Cacheable(key = "#date",
+            value = "currency-moex-data",
+            condition = "#date != null " +
+                    "&& T(java.time.LocalDate).parse(#date).isAfter(T(java.time.LocalDate).now().with(T(java.time.DayOfWeek).MONDAY).minusDays(1)) " +
+                    "&& T(java.time.LocalDate).parse(#date).isBefore(T(java.time.LocalDate).now().with(T(java.time.DayOfWeek).SUNDAY).plusDays(1))",
+            unless = "#result == null"
+    )
+    public DataDto<List<CurrencyDataDto>> find(String date) {
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            Optional<List<Currency>> currencies = this.currencyRepository.findByTradeDate(localDate);
 
-        return new DataDto<>(currencies
-                .orElseThrow(() -> new CurrencyNotFoundByDateException(Message.CURRENCY_NOT_FOUND))
-                .stream()
-                .map(this.currencyDataDtoMapper::toDto)
-                .toList()
-        );
+            return new DataDto<>(currencies
+                    .orElseThrow(() -> new CurrencyNotFoundByDateException(Message.CURRENCY_NOT_FOUND))
+                    .stream()
+                    .map(this.currencyDataDtoMapper::toDto)
+                    .toList()
+            );
+        }
+        catch (Exception e) {
+            throw new IncorrectDateFormat(Message.INCORRECT_DATE_FORMAT);
+        }
     }
 }

@@ -23,6 +23,6 @@ public class CurrencyController {
     @GetMapping("/get")
     public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByDate(@RequestParam(name = "date") String date) {
         return ResponseEntity
-                .ok(this.currencyService.findAllByDate(date));
+                .ok(this.currencyService.find(date));
     }
 }
