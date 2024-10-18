@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,6 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CurrencyService {
-    // batch insert чтобы не повторялись строки
     private final ClearingTypeRepository clearingTypeRepository;
     private final SecurityRepository securityRepository;
     private final CurrencyRepository currencyRepository;
@@ -42,6 +42,7 @@ public class CurrencyService {
     private final CurrentDataMapper currentDataMapper;
     private final CurrencyDataDtoMapper currencyDataDtoMapper;
 
+    private final DateTimeFormatter dateTimeFormatter;
 
     @PostConstruct
     public void init() {
@@ -92,13 +93,14 @@ public class CurrencyService {
     @Cacheable(key = "#date",
             value = "currency-moex-data",
             condition = "#date != null " +
+                    "&& #date.matches('^\\d{4}-\\d{2}-\\d{2}$') " +
                     "&& T(java.time.LocalDate).parse(#date).isAfter(T(java.time.LocalDate).now().with(T(java.time.DayOfWeek).MONDAY).minusDays(1)) " +
                     "&& T(java.time.LocalDate).parse(#date).isBefore(T(java.time.LocalDate).now().with(T(java.time.DayOfWeek).SUNDAY).plusDays(1))",
             unless = "#result == null"
     )
     public DataDto<List<CurrencyDataDto>> find(String date) {
         try {
-            LocalDate localDate = LocalDate.parse(date);
+            LocalDate localDate = LocalDate.parse(date, this.dateTimeFormatter);
             Optional<List<Currency>> currencies = this.currencyRepository.findByTradeDate(localDate);
 
             return new DataDto<>(currencies

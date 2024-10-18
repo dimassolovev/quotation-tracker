@@ -21,7 +21,10 @@ public class CurrencyController {
     private final CurrencyService currencyService;
 
     @GetMapping("/get")
-    public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByDate(@RequestParam(name = "date") String date) {
+    public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByDate(
+            @RequestParam(name = "date", required = false) String date,
+            @RequestParam(name = "currency_name", required = false) String currencyName
+    ) {
         return ResponseEntity
                 .ok(this.currencyService.find(date));
     }
