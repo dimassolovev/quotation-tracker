@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,10 +23,9 @@ public class CurrencyController {
 
     @GetMapping("/get")
     public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByDate(
-            @RequestParam(name = "date", required = false) String date,
-            @RequestParam(name = "currency_name", required = false) String currencyName
+            @RequestParam(name = "date", required = false) String date
     ) {
         return ResponseEntity
-                .ok(this.currencyService.find(date));
+                .ok(this.currencyService.find(date == null ? LocalDate.now().toString() : date));
     }
 }

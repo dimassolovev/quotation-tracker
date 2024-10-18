@@ -43,6 +43,8 @@ scheduler:
     cron-expression: "0 0 18 * * SUN"
     limit: 100
     securities:
+      - "TRY"
+      - "HKD"
       - "GBP"
       - "USD"
       - "EUR"
