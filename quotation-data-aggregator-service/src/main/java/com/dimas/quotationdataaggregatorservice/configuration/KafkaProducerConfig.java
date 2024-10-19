@@ -65,10 +65,10 @@ public class KafkaProducerConfig {
                 .config(
                         TopicConfig.RETENTION_MS_CONFIG,
                         String.valueOf(Duration.ofDays(
-                                        kafkaConfigurationProperty
-                                                .getRetention()
+                                                kafkaConfigurationProperty
+                                                        .getRetention()
                                         )
-                                .toMillis()
+                                        .toMillis()
                         )
                 )
                 .build();

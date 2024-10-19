@@ -2,10 +2,8 @@ package com.dimas.moexdataservice.controller;
 
 import com.dimas.moexdataservice.model.dto.currency.CurrencyDataDto;
 import com.dimas.moexdataservice.model.dto.currency.DataDto;
-import com.dimas.moexdataservice.service.CurrencyService;
-
+import com.dimas.moexdataservice.service.CurrencyCacheService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("${other.currency.related_path}")
 public class CurrencyController {
-    private final CurrencyService currencyService;
+    private final CurrencyCacheService currencyCacheService;
 
     @GetMapping("/list")
     public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByDate(
             @RequestParam(name = "date", required = false) String date
     ) {
         return ResponseEntity
-                .ok(this.currencyService.find(date == null ? LocalDate.now().toString() : date));
+                .ok(this.currencyCacheService.find(date == null ? LocalDate.now().toString() : date));
     }
 }

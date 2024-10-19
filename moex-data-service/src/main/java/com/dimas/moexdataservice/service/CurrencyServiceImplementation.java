@@ -1,0 +1,76 @@
+package com.dimas.moexdataservice.service;
+
+import com.dimas.moexdataservice.mapper.kafka.CurrentDataMapper;
+import com.dimas.moexdataservice.mapper.kafka.SecurityDataMapper;
+import com.dimas.moexdataservice.model.entity.currency.ClearingType;
+import com.dimas.moexdataservice.model.entity.currency.Currency;
+import com.dimas.moexdataservice.model.entity.currency.Security;
+import com.dimas.moexdataservice.model.kafka.currency.CurrencyData;
+import com.dimas.moexdataservice.model.kafka.currency.SecurityData;
+import com.dimas.moexdataservice.repository.ClearingTypeRepository;
+import com.dimas.moexdataservice.repository.CurrencyRepository;
+import com.dimas.moexdataservice.repository.SecurityRepository;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+public class CurrencyServiceImplementation implements CurrencyService {
+    private final ClearingTypeRepository clearingTypeRepository;
+    private final SecurityRepository securityRepository;
+    private final CurrencyRepository currencyRepository;
+    private final SecurityDataMapper securityDataMapper;
+    private final CurrentDataMapper currentDataMapper;
+
+    @PostConstruct
+    public void init() {
+        Map<String, ClearingType> clearingTypeMap = this.clearingTypeRepository
+                .findAll()
+                .stream()
+                .collect(
+                        Collectors.toMap(
+                                ClearingType::getClearing,
+                                clearingType -> clearingType
+                        )
+                );
+
+        Map<String, Security> securityMap = this.securityRepository
+                .findAll()
+                .stream()
+                .collect(
+                        Collectors.toMap(
+                                Security::getPairCode,
+                                security -> security
+                        )
+                );
+
+        this.securityDataMapper.setSecurityMap(securityMap);
+        this.securityDataMapper.setClearingTypeMap(clearingTypeMap);
+        this.currentDataMapper.setSecurityMap(securityMap);
+        this.currentDataMapper.setClearingTypeMap(clearingTypeMap);
+    }
+
+    @Override
+    @Transactional
+    public void save(CurrencyData currencyData) {
+        List<Currency> currencies = new ArrayList<>();
+
+        for (SecurityData securityData : currencyData.getSecurities()) {
+            Currency currency = this.securityDataMapper.toEntity(securityData);
+            currencies.add(currency);
+        }
+
+        Currency currency = this.currentDataMapper.toEntity(currencyData.getCurrent());
+        currencies.add(currency);
+
+        this.currencyRepository.saveAll(currencies);
+    }
+}
