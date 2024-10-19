@@ -17,7 +17,7 @@ public class Security {
     @SequenceGenerator(name = "security_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "security_id_seq")
     @Column(name = "id")
-    Integer id;
+    Long id;
 
     @Column(name = "pair_code")
     String pairCode;

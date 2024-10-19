@@ -6,8 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Date;
+import java.sql.Time;
+
 
 @Entity(name = "currency_data")
 @Data
@@ -18,13 +19,13 @@ public class Currency {
     @SequenceGenerator(name = "currency_data_id_seq", allocationSize = 45)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "currency_data_id_seq")
     @Column(name = "id")
-    Integer id;
+    Long id;
 
     @Column(name = "trade_date")
-    LocalDate tradeDate;
+    Date tradeDate;
 
     @Column(name = "trade_time")
-    LocalTime tradeTime;
+    Time tradeTime;
 
     @Column(name = "rate")
     Double rate;

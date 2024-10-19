@@ -5,10 +5,7 @@ import com.dimas.moexdataservice.model.dto.currency.DataDto;
 import com.dimas.moexdataservice.service.CurrencyCacheService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,9 +18,25 @@ public class CurrencyController {
 
     @GetMapping("/list")
     public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByDate(
-            @RequestParam(name = "date", required = false) String date
+            @RequestParam(name = "tradeDate", required = false) String tradeDate
     ) {
         return ResponseEntity
-                .ok(this.currencyCacheService.find(date == null ? LocalDate.now().toString() : date));
+                .ok(this.currencyCacheService.find(
+                                tradeDate == null ? LocalDate.now().toString() : tradeDate
+                        )
+                );
+    }
+
+    @GetMapping("/list/{pairCode}")
+    public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByPairCode(
+            @PathVariable("pairCode") String currencyCode,
+            @RequestParam(name = "tradeDate", required = false) String tradeDate
+    ) {
+        return ResponseEntity
+                .ok(this.currencyCacheService.findByPairCode(
+                        tradeDate == null ? LocalDate.now().toString() : tradeDate,
+                        String.format("%s/RUB", currencyCode)
+                        )
+                );
     }
 }

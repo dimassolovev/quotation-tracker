@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CurrencyCacheService {
     DataDto<List<CurrencyDataDto>> find(String date);
+    DataDto<List<CurrencyDataDto>> findByPairCode(String date, String pairCode);
 }

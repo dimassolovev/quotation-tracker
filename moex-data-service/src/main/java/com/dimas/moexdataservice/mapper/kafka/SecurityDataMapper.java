@@ -8,8 +8,11 @@ import com.dimas.moexdataservice.model.kafka.currency.SecurityData;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 
@@ -21,13 +24,13 @@ public class SecurityDataMapper implements EntityMappable<Currency, SecurityData
     private Map<String, Security> securityMap;
 
     @Override
-    public Currency toEntity(SecurityData dto) {
+    public Currency toEntity(SecurityData dto) throws DateTimeParseException {
         Currency currency = new Currency();
 
         currency.setSecurity(this.securityMap.get(dto.getSecid()));
         currency.setClearingType(this.clearingTypeMap.get(dto.getClearing()));
-        currency.setTradeTime(LocalTime.parse(dto.getTradetime()));
-        currency.setTradeDate(LocalDate.parse(dto.getTradedate()));
+        currency.setTradeTime(Time.valueOf(dto.getTradetime()));
+        currency.setTradeDate(Date.valueOf(dto.getTradedate()));
         currency.setRate(dto.getRate());
 
         return currency;

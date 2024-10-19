@@ -17,7 +17,7 @@ public class ClearingType {
     @SequenceGenerator(name = "clearing_type_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clearing_type_id_seq")
     @Column(name = "id")
-    Integer id;
+    Long id;
 
     @Column(name = "clearing")
     String clearing;
