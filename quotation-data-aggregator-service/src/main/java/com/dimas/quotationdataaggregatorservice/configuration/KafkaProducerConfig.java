@@ -27,10 +27,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class KafkaProducerConfig {
 
+    private final ObjectMapper objectMapper;
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
-
-    private final ObjectMapper objectMapper;
 
     @Bean
     public Map<String, Object> producerConfig() {
