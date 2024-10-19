@@ -1,7 +1,6 @@
 package com.dimas.moexdataservice.model.entity.currency;
 
 import jakarta.persistence.*;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;

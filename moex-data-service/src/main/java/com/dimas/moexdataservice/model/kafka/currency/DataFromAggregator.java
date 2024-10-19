@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DataFromAggregator<T>  {
+public class DataFromAggregator<T> {
     T data;
 }

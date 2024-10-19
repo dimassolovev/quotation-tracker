@@ -6,7 +6,7 @@ import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
-public class ResponseFromKafka extends ApplicationEvent  {
+public class ResponseFromKafka extends ApplicationEvent {
     private final DataFromAggregator<CurrencyData> dataFromAggregator;
 
     public ResponseFromKafka(Object source, DataFromAggregator<CurrencyData> dataFromAggregator) {

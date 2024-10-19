@@ -15,7 +15,7 @@ public class KafkaResponsePublisher implements Publisher<CurrencyData> {
     @Override
     public void publishResponseFromSourcesEvent(DataFromAggregator<CurrencyData> dataFromExternalServices) {
         this.applicationEventPublisher.publishEvent(
-            new ResponseFromKafka(this, dataFromExternalServices)
+                new ResponseFromKafka(this, dataFromExternalServices)
         );
     }
 }

@@ -7,7 +7,8 @@ CREATE SEQUENCE clearing_type_id_seq
     CACHE 5;
 
 --table
-CREATE TABLE IF NOT EXISTS clearing_type (
-    id BIGINT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS clearing_type
+(
+    id       BIGINT PRIMARY KEY,
     clearing VARCHAR(6) NOT NULL UNIQUE
 );

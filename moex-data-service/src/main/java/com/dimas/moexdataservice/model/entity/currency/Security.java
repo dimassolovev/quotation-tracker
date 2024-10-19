@@ -1,7 +1,6 @@
 package com.dimas.moexdataservice.model.entity.currency;
 
 import jakarta.persistence.*;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ public class Security {
     @Column(name = "id")
     Integer id;
 
-    @Column(name ="pair_code")
+    @Column(name = "pair_code")
     String pairCode;
 
     @OneToMany(mappedBy = "security")

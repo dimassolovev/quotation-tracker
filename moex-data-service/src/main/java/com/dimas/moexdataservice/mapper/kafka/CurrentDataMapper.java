@@ -5,9 +5,7 @@ import com.dimas.moexdataservice.model.entity.currency.ClearingType;
 import com.dimas.moexdataservice.model.entity.currency.Currency;
 import com.dimas.moexdataservice.model.entity.currency.Security;
 import com.dimas.moexdataservice.model.kafka.currency.CurrentData;
-
 import lombok.Setter;
-
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

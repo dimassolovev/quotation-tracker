@@ -7,7 +7,8 @@ CREATE SEQUENCE security_id_seq
     CACHE 5;
 
 --table
-CREATE TABLE IF NOT EXISTS security (
-    id BIGINT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS security
+(
+    id        BIGINT PRIMARY KEY,
     pair_code VARCHAR(7) NOT NULL UNIQUE
 );

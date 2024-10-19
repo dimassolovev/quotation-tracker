@@ -1,7 +1,6 @@
 package com.dimas.moexdataservice.repository;
 
 import com.dimas.moexdataservice.model.entity.currency.Currency;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
