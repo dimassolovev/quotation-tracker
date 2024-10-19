@@ -6,9 +6,9 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.stream.Collectors;
 
-
 @Component
 public class StringTool {
+
     public String filterEmptyLines(String csvData) {
         return new BufferedReader(new StringReader(csvData)).lines()
                 .filter(line -> !line.trim().isEmpty())

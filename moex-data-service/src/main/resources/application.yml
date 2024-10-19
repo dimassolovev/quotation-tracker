@@ -44,10 +44,9 @@ spring:
         generate_statistics: true
         order_updates: true
 
-
 kafka:
   topic: quotation.moex-data.currencies
 
 other:
   currency:
-    related_path: "api/v1/currency/"
+    related_path: "currencies/v1/"

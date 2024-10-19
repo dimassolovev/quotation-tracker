@@ -1,10 +1,9 @@
 package com.dimas.quotationdataaggregatorservice.scheduler;
 
 import com.dimas.quotationdataaggregatorservice.constant.property.KafkaConfigurationProperty;
-import com.dimas.quotationdataaggregatorservice.model.external.DataFromExternalServices;
 import com.dimas.quotationdataaggregatorservice.model.external.moex.currency.CurrencyData;
 import com.dimas.quotationdataaggregatorservice.publisher.MoexCurrencyResponseEventPublisher;
-import com.dimas.quotationdataaggregatorservice.service.moex.api.client.CurrencyDataFromMoscowExchangeService;
+import com.dimas.quotationdataaggregatorservice.service.moex.api.CurrencyDataFromMoscowExchangeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,7 +25,7 @@ public class CurrencyDataFromMoscowExchangeScheduler {
         List<CurrencyData> currencyDataList = this.currencyDataFromMoscowExchangeService.getCurrencyData();
 
         this.moexCurrencyResponseEventPublisher.publishResponseFromSourcesEvent(
-                new DataFromExternalServices<>(currencyDataList),
+                currencyDataList,
                 kafkaConfigurationProperty.getTopic()
         );
     }

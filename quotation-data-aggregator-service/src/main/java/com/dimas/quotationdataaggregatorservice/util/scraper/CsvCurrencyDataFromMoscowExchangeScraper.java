@@ -4,22 +4,19 @@ import com.dimas.quotationdataaggregatorservice.model.external.moex.currency.Cur
 import com.dimas.quotationdataaggregatorservice.model.external.moex.currency.Current;
 import com.dimas.quotationdataaggregatorservice.model.external.moex.currency.Security;
 import com.dimas.quotationdataaggregatorservice.util.tool.StringTool;
-
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class CsvCurrencyDataFromMoscowExchangeService {
+public class CsvCurrencyDataFromMoscowExchangeScraper {
     private final CsvMapper csvMapper;
     private final CsvSchema csvSchema;
     private final StringTool stringTool;

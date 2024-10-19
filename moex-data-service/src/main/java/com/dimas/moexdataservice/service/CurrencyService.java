@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -110,7 +111,7 @@ public class CurrencyService {
                     .toList()
             );
         }
-        catch (Exception e) {
+        catch (DateTimeParseException exception) {
             throw new IncorrectDateFormat(Message.INCORRECT_DATE_FORMAT);
         }
     }

@@ -21,7 +21,7 @@ import java.util.List;
 public class CurrencyController {
     private final CurrencyService currencyService;
 
-    @GetMapping("/get")
+    @GetMapping("/list")
     public ResponseEntity<DataDto<List<CurrencyDataDto>>> getCurrenciesByDate(
             @RequestParam(name = "date", required = false) String date
     ) {

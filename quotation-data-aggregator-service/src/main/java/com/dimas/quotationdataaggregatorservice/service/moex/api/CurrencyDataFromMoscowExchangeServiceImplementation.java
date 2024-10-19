@@ -1,12 +1,10 @@
-package com.dimas.quotationdataaggregatorservice.service.moex.api.client;
+package com.dimas.quotationdataaggregatorservice.service.moex.api;
 
+import com.dimas.quotationdataaggregatorservice.client.MoscowExchangeClient;
 import com.dimas.quotationdataaggregatorservice.constant.property.CurrencyMoexClientProperty;
-import com.dimas.quotationdataaggregatorservice.exception.ParseObjectException;
 import com.dimas.quotationdataaggregatorservice.model.external.moex.currency.CurrencyData;
-import com.dimas.quotationdataaggregatorservice.service.moex.api.MoscowExchangeClientService;
-
+import com.dimas.quotationdataaggregatorservice.util.scraper.CsvCurrencyDataFromMoscowExchangeScraper;
 import lombok.RequiredArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +16,13 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CurrencyDataFromMoscowExchangeService {
+public class CurrencyDataFromMoscowExchangeServiceImplementation implements CurrencyDataFromMoscowExchangeService {
     private final CurrencyMoexClientProperty currencyMoexClientProperty;
-    private final MoscowExchangeClientService moscowExchangeClientService;
     private final DateTimeFormatter dateTimeFormatter;
+    private final MoscowExchangeClient moscowExchangeClient;
+    private final CsvCurrencyDataFromMoscowExchangeScraper csvCurrencyDataFromMoscowExchangeScraper;
 
+    @Override
     public List<CurrencyData> getCurrencyData() {
         String currentDate = LocalDate.now().format(this.dateTimeFormatter);
         String pastDate = LocalDate.parse(currentDate, this.dateTimeFormatter).minusDays(6).format(this.dateTimeFormatter);
@@ -32,7 +32,7 @@ public class CurrencyDataFromMoscowExchangeService {
             CurrencyData currencyData = null;
             do {
                 try {
-                    currencyData = moscowExchangeClientService.getCurrency(
+                    String response = this.moscowExchangeClient.getCurrency(
                             String.format("%s/RUB", security),
                             pastDate,
                             currentDate,
@@ -41,8 +41,10 @@ public class CurrencyDataFromMoscowExchangeService {
                             this.currencyMoexClientProperty.getLimit(),
                             this.currencyMoexClientProperty.getStringOrder()
                     );
-                }
-                catch (ParseObjectException exception) {
+
+                    currencyData = this.csvCurrencyDataFromMoscowExchangeScraper.parseCurrencyDataFromMoscowExchange(response);
+
+                } catch (Exception exception) {
                     log.error(exception.getMessage(), exception);
                     break;
                 }

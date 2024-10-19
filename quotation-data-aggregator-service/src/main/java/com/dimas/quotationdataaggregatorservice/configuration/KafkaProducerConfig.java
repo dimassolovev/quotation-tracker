@@ -2,15 +2,11 @@ package com.dimas.quotationdataaggregatorservice.configuration;
 
 import com.dimas.quotationdataaggregatorservice.constant.property.KafkaConfigurationProperty;
 import com.dimas.quotationdataaggregatorservice.model.external.DataFromExternalServices;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.RequiredArgsConstructor;
-
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.TopicConfig;
-
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
