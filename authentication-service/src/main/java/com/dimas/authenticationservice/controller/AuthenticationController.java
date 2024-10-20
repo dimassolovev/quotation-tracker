@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +52,7 @@ public class AuthenticationController {
     @PostMapping("/token")
     public ResponseEntity<TokenBody> token(
             @Parameter(description = "Request with username, password and email")
-            @RequestBody AuthenticationRequest authenticationRequest
+            @RequestBody @Valid AuthenticationRequest authenticationRequest
     ) throws EntryException {
 
         return ResponseEntity.ok(
@@ -81,7 +82,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<Void> register(
             @Parameter(description = "Request with username, password and email")
-            @RequestBody AuthenticationRequest authenticationRequest
+            @RequestBody @Valid AuthenticationRequest authenticationRequest
     ) throws GeneratingTokenException {
 
         authenticationService.saveUser(authenticationRequest);
