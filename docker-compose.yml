@@ -2,20 +2,31 @@ version: "3.1"
 
 
 services:
-  postgres-db:
-    container_name: postgres
+  postgres-moex-data-db:
+    container_name: postgres-moex-data-db
     image: postgres:14
     restart: always
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${MOEX_DATA_DB}
+      POSTGRES_USER: ${MOEX_DATA_DB_USER}
+      POSTGRES_PASSWORD: ${MOEX_DATA_DB_PASSWORD}
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
-      - postgres-db:/var/lib/postgresql/data
-    networks:
-      - postgres-net
+      - postgres-moex-data-db:/var/lib/postgresql/moex-data/data
+
+  postgres-auth-service-db:
+    container_name: postgres-auth-service-db
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: ${AUTH_SERVICE_DB}
+      POSTGRES_USER: ${AUTH_SERVICE_DB_USER}
+      POSTGRES_PASSWORD: ${AUTH_SERVICE_DB_PASSWORD}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres-auth-service-db:/var/lib/postgresql/auth-service/data
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -29,9 +40,6 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
-    environment:
-      - ${REDIS_USER}
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
     volumes:
       - redis-cache:/var/lib/redis/data
 
@@ -49,11 +57,10 @@ services:
       - kafka-net
 
 volumes:
-  postgres-db:
+  postgres-auth-service-db:
+  postgres-moex-data-db:
   redis-cache:
 
 networks:
   kafka-net:
-    driver: bridge
-  postgres-net:
     driver: bridge

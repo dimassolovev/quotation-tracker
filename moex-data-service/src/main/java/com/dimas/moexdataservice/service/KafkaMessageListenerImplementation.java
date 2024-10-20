@@ -20,10 +20,11 @@ public class KafkaMessageListenerImplementation implements KafkaMessageListener 
 
     @Override
     @KafkaListener(topics = "${kafka.topic}", groupId = "${spring.kafka.consumer.group-id}")
-    public void onMessage(ConsumerRecord<Long, String> consumerRecord) {
+    public void onMessage(ConsumerRecord<String, String> consumerRecord) {
         try {
             DataFromAggregator<CurrencyData> dataFromAggregator = objectMapper.readValue(consumerRecord.value(), new TypeReference<>() {
             });
+            System.out.println(dataFromAggregator);
 
             this.kafkaResponsePublisher.publishResponseFromSourcesEvent(dataFromAggregator);
         } catch (Exception exception) {
