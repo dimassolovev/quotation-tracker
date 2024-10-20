@@ -32,7 +32,7 @@ public class CurrencyCacheServiceImplementation implements CurrencyCacheService 
             condition = "@dateValidator.isValid(#date)",
             unless = "#result == null"
     )
-    public DataDto<List<CurrencyDataDto>> find(String date) {
+    public DataDto<List<CurrencyDataDto>> find(String date) throws IncorrectDateFormat {
         try {
             LocalDate localDate = LocalDate.parse(date, this.dateTimeFormatter);
             List<Currency> currencies = this.currencyRepository.findByTradeDate(Date.valueOf(localDate));
@@ -54,7 +54,7 @@ public class CurrencyCacheServiceImplementation implements CurrencyCacheService 
             condition = "@dateValidator.isValid(#date)",
             unless = "#result == null"
     )
-    public DataDto<List<CurrencyDataDto>> findByPairCode(String date, String pairCode) {
+    public DataDto<List<CurrencyDataDto>> findByPairCode(String date, String pairCode) throws IncorrectDateFormat {
         try {
             LocalDate localDate = LocalDate.parse(date, this.dateTimeFormatter);
             List<Currency> currencies = this.currencyRepository.findByFiltration(Date.valueOf(localDate), pairCode);
