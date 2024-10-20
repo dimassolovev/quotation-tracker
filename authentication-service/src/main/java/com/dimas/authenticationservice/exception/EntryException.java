@@ -1,14 +1,9 @@
 package com.dimas.authenticationservice.exception;
 
-import com.dimas.authenticationservice.constant.Messages;
+import com.dimas.authenticationservice.constant.Message;
 
-import lombok.Getter;
-
-@Getter
 public class EntryException extends RuntimeException {
-    private final String message;
-
-    public EntryException(Messages message) {
-        this.message = message.getMessage();
+    public EntryException(Message message) {
+        super(message.getMessage());
     }
 }

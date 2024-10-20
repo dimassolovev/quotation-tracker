@@ -1,19 +1,17 @@
 package com.dimas.authenticationservice.util.security.jwt;
 
 import com.dimas.authenticationservice.constant.JwtProperties;
-
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-
-import javax.crypto.SecretKey;
-
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Component;
 
-import jakarta.annotation.PostConstruct;
-
+import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
@@ -35,7 +33,6 @@ public class JwtTokenProvider {
     public String createToken(Map<String, Object> claims, String username) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + jwtProperties.getTimeMillis());
-
         return Jwts.builder()
                 .claims(claims)
                 .subject(username)

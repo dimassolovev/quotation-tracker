@@ -2,13 +2,9 @@ package com.dimas.authenticationservice.configuration;
 
 import com.dimas.authenticationservice.model.dto.ExceptionMessage;
 import com.dimas.authenticationservice.service.UserService;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.servlet.http.HttpServletResponse;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -36,10 +32,24 @@ public class AuthenticationConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(
                 authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/authentication/token").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/authentication/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/authentication/validate-token").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/v1/authentication/**")
+                        .permitAll()
+                        .requestMatchers(
+                                "/v2/api-docs",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-resources",
+                                "/swagger-resources/**",
+                                "/configuration/ui",
+                                "/configuration/security",
+                                "/swagger-ui/**",
+                                "/webjars/**",
+                                "/swagger-ui.html")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated()
         );
         http.exceptionHandling(
                 exception -> exception.authenticationEntryPoint(

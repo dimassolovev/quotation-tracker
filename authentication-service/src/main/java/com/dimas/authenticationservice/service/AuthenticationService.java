@@ -1,6 +1,6 @@
 package com.dimas.authenticationservice.service;
 
-import com.dimas.authenticationservice.constant.Messages;
+import com.dimas.authenticationservice.constant.Message;
 import com.dimas.authenticationservice.exception.EntryException;
 import com.dimas.authenticationservice.exception.GeneratingTokenException;
 import com.dimas.authenticationservice.mapper.UserCredentialsMapper;
@@ -9,10 +9,8 @@ import com.dimas.authenticationservice.model.entity.Role;
 import com.dimas.authenticationservice.model.entity.UserCredentials;
 import com.dimas.authenticationservice.repository.UserCredentialsRepository;
 import com.dimas.authenticationservice.util.security.jwt.JwtTokenProvider;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -51,7 +49,7 @@ public class AuthenticationService {
         }
         catch (Exception e) {
             log.error(e.getMessage());
-            throw new EntryException(Messages.USER_CREDENTIALS_EXIST);
+            throw new EntryException(Message.USER_CREDENTIALS_EXIST);
         }
     }
 
@@ -63,16 +61,16 @@ public class AuthenticationService {
                     )
             );
 
-            return jwtTokenProvider.createToken(Map.of(), authenticationRequest.getUsername());
+            return jwtTokenProvider.createToken(Map.of("email", authenticationRequest.getEmail()), authenticationRequest.getUsername());
         }
 
         catch (InternalAuthenticationServiceException exception) {
-            throw new GeneratingTokenException(Messages.USER_NOT_FOUND);
+            throw new GeneratingTokenException(Message.USER_NOT_FOUND);
         }
 
         catch (Exception exception) {
             log.error(exception.getMessage(), exception);
-            throw new GeneratingTokenException(Messages.USER_NOT_FOUND);
+            throw new GeneratingTokenException(Message.USER_NOT_FOUND);
         }
     }
 

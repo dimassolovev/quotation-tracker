@@ -1,14 +1,9 @@
 package com.dimas.authenticationservice.exception;
 
-import com.dimas.authenticationservice.constant.Messages;
+import com.dimas.authenticationservice.constant.Message;
 
-import lombok.Getter;
-
-@Getter
 public class RoleNotFoundException extends RuntimeException {
-    private final String message;
-
-    public RoleNotFoundException(Messages message) {
-        this.message = message.getMessage();
+    public RoleNotFoundException(Message message) {
+        super(message.getMessage());
     }
 }
