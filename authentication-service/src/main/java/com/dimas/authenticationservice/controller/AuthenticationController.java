@@ -69,7 +69,7 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(
                 new TokenBody(
-                        authenticationService.generateToken(authenticationRequest)
+                        this.authenticationService.login(authenticationRequest)
                 )
         );
 
@@ -110,7 +110,7 @@ public class AuthenticationController {
             @RequestBody @Valid AuthenticationRequest authenticationRequest
     ) throws GeneratingTokenException {
 
-        authenticationService.saveUser(authenticationRequest);
+        this.authenticationService.register(authenticationRequest);
 
         return ResponseEntity.ok().build();
     }
@@ -135,7 +135,7 @@ public class AuthenticationController {
             @RequestBody TokenBody tokenBody
     ) {
         return ResponseEntity.ok(
-                authenticationService.validateToken(tokenBody.getToken())
+                this.authenticationService.validateToken(tokenBody.getToken())
         );
     }
 }

@@ -1,14 +1,16 @@
 package com.dimas.authenticationservice.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Entity
-@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@Entity
 @Table(name = "user_credentials")
 public class UserCredentials {
     @Id
@@ -24,6 +26,9 @@ public class UserCredentials {
 
     @Column(name = "email")
     private String email;
+
+    @OneToOne(mappedBy = "userCredentials", cascade = CascadeType.PERSIST)
+    private UserUUID userUUID;
 
     @ManyToMany
     @JoinTable(name = "user_role",

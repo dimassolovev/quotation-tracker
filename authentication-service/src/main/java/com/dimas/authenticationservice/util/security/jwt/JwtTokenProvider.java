@@ -32,13 +32,13 @@ public class JwtTokenProvider {
 
     public String createToken(Map<String, Object> claims, String username) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + jwtProperties.getTimeMillis());
+        Date validity = new Date(now.getTime() + this.jwtProperties.getTimeMillis());
         return Jwts.builder()
                 .claims(claims)
                 .subject(username)
                 .issuedAt(now)
                 .expiration(validity)
-                .signWith(secretKey, Jwts.SIG.HS256)
+                .signWith(this.secretKey, Jwts.SIG.HS256)
                 .compact();
 
     }

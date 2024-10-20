@@ -58,7 +58,7 @@ public class AuthenticationConfig {
                             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                             response.setCharacterEncoding("UTF-8");
 
-                            String jsonResponse = objectMapper.writeValueAsString(
+                            String jsonResponse = this.objectMapper.writeValueAsString(
                                     new ExceptionMessage(ex.getMessage())
                             );
                             response.getWriter().write(jsonResponse);
@@ -82,7 +82,7 @@ public class AuthenticationConfig {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userService);
+        daoAuthenticationProvider.setUserDetailsService(this.userService);
 
         return daoAuthenticationProvider;
     }
