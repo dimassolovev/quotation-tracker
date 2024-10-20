@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @Tag(name = "Authentication")
 @RestController
 @RequestMapping("${other.authentication.related_path}")
@@ -42,10 +44,20 @@ public class AuthenticationController {
                     @ApiResponse(
                             description = "Bad request",
                             responseCode = "400",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = ExceptionMessage.class)
-                            )
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema = @Schema(
+                                                    implementation = ExceptionMessage.class
+                                            )
+                                    ),
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema =  @Schema(
+                                                    implementation = Map.class
+                                            )
+                                    )
+                            }
                     )
             }
     )
@@ -75,7 +87,20 @@ public class AuthenticationController {
                     @ApiResponse(
                             description = "Bad request",
                             responseCode = "400",
-                            content = @Content(schema = @Schema(hidden = true))
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema = @Schema(
+                                                    implementation = ExceptionMessage.class
+                                            )
+                                    ),
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema =  @Schema(
+                                                    implementation = Map.class
+                                            )
+                                    )
+                            }
                     )
             }
     )
