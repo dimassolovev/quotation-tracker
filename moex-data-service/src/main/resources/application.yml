@@ -1,51 +1,10 @@
-server:
-  port: 56781
-
 spring:
   application:
     name: moex-data-service
 
-  cache:
-    type: redis
-    redis:
-      time-to-live: 86400
-      cache-null-values: false
+  config:
+    import: configserver:http://localhost:${CONFIG_SERVICE_PORT}
 
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: moex-data.currencies-1
-
-  datasource:
-    url: ${POSTGRES_URL}
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yml
-    url: ${spring.datasource.url}
-    user: ${spring.datasource.username}
-    password: ${spring.datasource.password}
-    enabled: true
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        enable_lazy_load_no_trans: true
-
-        jdbc:
-          batch_size: 45
-        order_updates: true
-
-kafka:
-  topic: quotation.moex-data.currencies
-
-other:
-  currency:
-    related_path: v1/currencies/
+  cloud:
+    config:
+      uri: ${GITHUB_URL}

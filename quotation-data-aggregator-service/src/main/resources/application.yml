@@ -1,60 +1,10 @@
-server:
-  port: 56783
-
 spring:
   application:
     name: quotation-data-aggregator-service
 
-  kafka:
-    bootstrap-servers: localhost:9092
+  config:
+    import: configserver:http://localhost:${CONFIG_SERVICE_PORT}
 
   cloud:
-    openfeign:
-      client:
-        config:
-          moex-client:
-            url: https://iss.moex.com
-
-kafka:
-  retention: 14
-  topic: "quotation.moex-data.currencies"
-
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
-  instance:
-    instance-id: ${random.uuid}
-
-management:
-  endpoints.web.exposure.include: "prometheus, health"
-  metrics:
-    distribution:
-      percentiles-histogram:
-        "[http.server.requests]": true
-  prometheus:
-    metrics:
-      export:
-        enabled: true
-
-scheduler:
-  currency-moex-client:
-    cron-expression: "0 0 18 * * SUN"
-    limit: 100
-    securities:
-      - "TRY"
-      - "HKD"
-      - "GBP"
-      - "USD"
-      - "EUR"
-      - "CAD"
-      - "CHF"
-      - "KZT"
-      - "JPY"
-      - "CNY"
-    meta-mode: "on"
-    choice:
-    string-order:
-
-
+    config:
+      uri: ${GITHUB_URL}
