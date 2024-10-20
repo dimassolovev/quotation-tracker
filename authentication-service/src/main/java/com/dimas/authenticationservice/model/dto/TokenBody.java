@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "Token model")
 public class TokenBody {
-    @Schema(description = "jwt token", example = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImdvaGFzb3h4QGdtYWlsLmNvbSIsInN1YiI6ImRpbWFzIiwiaWF0IjoxNzI5NDI0MTY4LCJleHAiOjE3Mjk1MTA1Njh9.88fqbpvhPlP5GIihSxqS-XOrCyfQeb7q0hgGot38WeQ")
+    @Schema(description = "jwt token", example = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwiZW1haWwiOiJnb2hhc294eEBnbWFpbC5jb20iLCJzdWIiOiJkaW1hcyIsImlhdCI6MTcyOTQyNjE1NiwiZXhwIjoxNzI5NTEyNTU2fQ.DZH_iPQ9-5tBb8oXU1GmUi-tvEbp0-Iun9Zyqc4o9P0")
     private String token;
 }
