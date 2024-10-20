@@ -1,12 +1,15 @@
--- sequence
-CREATE SEQUENCE currency_data_id_seq
-    START WITH 1
-    INCREMENT BY 45
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 45;
+CREATE TABLE IF NOT EXISTS security
+(
+    id        BIGINT PRIMARY KEY,
+    pair_code VARCHAR(7) NOT NULL UNIQUE
+);
 
--- table
+CREATE TABLE IF NOT EXISTS clearing_type
+(
+    id       BIGINT PRIMARY KEY,
+    clearing VARCHAR(6) NOT NULL UNIQUE
+);
+
 CREATE TABLE IF NOT EXISTS currency_data
 (
     id               BIGINT PRIMARY KEY,

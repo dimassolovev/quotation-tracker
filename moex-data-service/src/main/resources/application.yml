@@ -23,7 +23,7 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   liquibase:
-    change-log: classpath:db/changelog/master.yml
+    change-log: classpath:db/changelog/db.changelog-master.yml
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
