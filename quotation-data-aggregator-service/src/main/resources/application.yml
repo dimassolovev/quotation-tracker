@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 56783
 
 spring:
   application:
@@ -20,12 +20,12 @@ kafka:
   topic: "quotation.moex-data.currencies"
 
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
-#  instance:
-#    instance-id: ${random.uuid}
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
+  instance:
+    instance-id: ${random.uuid}
 
 management:
   endpoints.web.exposure.include: "prometheus, health"

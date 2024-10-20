@@ -48,4 +48,4 @@ kafka:
 
 other:
   currency:
-    related_path: "v1/currencies/"
+    related_path: v1/currencies/

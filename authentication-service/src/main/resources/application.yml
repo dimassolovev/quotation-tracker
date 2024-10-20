@@ -1,10 +1,10 @@
 server:
   port: 56782
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:${DISCOVERY_SERVICE_PORT}/eureka
 
 spring:
   application:
@@ -44,4 +44,4 @@ services:
 
 other:
   authentication:
-    related_path: "v1/authentication/"
+    related_path: v1/authentication/
