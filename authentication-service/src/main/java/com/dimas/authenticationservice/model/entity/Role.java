@@ -1,7 +1,6 @@
 package com.dimas.authenticationservice.model.entity;
 
 import jakarta.persistence.*;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

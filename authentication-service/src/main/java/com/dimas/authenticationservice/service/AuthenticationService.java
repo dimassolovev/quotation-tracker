@@ -49,14 +49,13 @@ public class AuthenticationService {
 
         try {
             userCredentialsRepository.save(userCredentials);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             throw new EntryException(Message.USER_CREDENTIALS_EXIST);
         }
     }
 
-    public String generateToken(AuthenticationRequest authenticationRequest) throws GeneratingTokenException  {
+    public String generateToken(AuthenticationRequest authenticationRequest) throws GeneratingTokenException {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -66,23 +65,19 @@ public class AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             return jwtTokenProvider.createToken(Map.of(
-                    "email", authenticationRequest.getEmail(),
-                    "roles", SecurityContextHolder
-                            .getContext()
-                            .getAuthentication()
-                            .getAuthorities()
-                            .stream()
-                            .map(GrantedAuthority::getAuthority)
-                            .toList()
-            ),
+                            "email", authenticationRequest.getEmail(),
+                            "roles", SecurityContextHolder
+                                    .getContext()
+                                    .getAuthentication()
+                                    .getAuthorities()
+                                    .stream()
+                                    .map(GrantedAuthority::getAuthority)
+                                    .toList()
+                    ),
                     authenticationRequest.getUsername());
-        }
-
-        catch (InternalAuthenticationServiceException exception) {
+        } catch (InternalAuthenticationServiceException exception) {
             throw new GeneratingTokenException(Message.USER_NOT_FOUND);
-        }
-
-        catch (Exception exception) {
+        } catch (Exception exception) {
             log.error(exception.getMessage(), exception);
             throw new GeneratingTokenException(Message.USER_NOT_FOUND);
         }

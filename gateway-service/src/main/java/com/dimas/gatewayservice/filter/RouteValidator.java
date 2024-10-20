@@ -1,9 +1,7 @@
 package com.dimas.gatewayservice.filter;
 
 import com.dimas.gatewayservice.constant.UriProperties;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 

@@ -39,9 +39,9 @@ public class CurrencyCacheServiceImplementation implements CurrencyCacheService 
 
             return new DataDto<>(
                     currencies
-                    .stream()
-                    .map(this.currencyDataDtoMapper::toDto)
-                    .toList()
+                            .stream()
+                            .map(this.currencyDataDtoMapper::toDto)
+                            .toList()
             );
         } catch (DateTimeParseException exception) {
             throw new IncorrectDateFormat(Message.INCORRECT_DATE_FORMAT);

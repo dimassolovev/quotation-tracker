@@ -10,7 +10,8 @@ public enum Messages {
     AUTHENTICATION_HEADER_FAILED("Missing Authorization header"),
     EMPTY_AUTHENTICATION_HEADER("Empty Authorization header"),
     INVALID_TOKEN_FORMAT("Invalid token format"),
-    TOKEN_VALIDATION_FAILED("Token validation failed"),;
+    TOKEN_VALIDATION_FAILED("Token validation failed"),
+    ;
 
     private final String message;
 }

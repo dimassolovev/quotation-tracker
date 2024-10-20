@@ -2,9 +2,7 @@ package com.dimas.authenticationservice.service;
 
 import com.dimas.authenticationservice.model.entity.UserCredentials;
 import com.dimas.authenticationservice.repository.UserCredentialsRepository;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

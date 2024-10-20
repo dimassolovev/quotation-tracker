@@ -1,3 +1,4 @@
 package com.dimas.gatewayservice.model;
 
-public record ExceptionMessage(String message) {}
+public record ExceptionMessage(String message) {
+}

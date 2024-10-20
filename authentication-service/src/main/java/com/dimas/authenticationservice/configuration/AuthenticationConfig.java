@@ -53,7 +53,7 @@ public class AuthenticationConfig {
         );
         http.exceptionHandling(
                 exception -> exception.authenticationEntryPoint(
-                        (request, response, ex) ->  {
+                        (request, response, ex) -> {
                             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                             response.setCharacterEncoding("UTF-8");

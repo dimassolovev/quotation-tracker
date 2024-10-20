@@ -4,16 +4,13 @@ import com.dimas.gatewayservice.constant.Messages;
 import com.dimas.gatewayservice.exception.FilterException;
 import com.dimas.gatewayservice.model.TokenBody;
 import com.dimas.gatewayservice.service.AuthenticationService;
-
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
-
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -62,5 +59,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 .then(chain.filter(exchange));
     }
 
-    public static class Config {}
+    public static class Config {
+    }
 }

@@ -96,8 +96,8 @@ public class CurrencyController {
 
         return ResponseEntity
                 .ok(this.currencyCacheService.findByPairCode(
-                        tradeDate == null ? LocalDate.now().toString() : tradeDate,
-                        String.format("%s/RUB", currencyCode)
+                                tradeDate == null ? LocalDate.now().toString() : tradeDate,
+                                String.format("%s/RUB", currencyCode)
                         )
                 );
     }

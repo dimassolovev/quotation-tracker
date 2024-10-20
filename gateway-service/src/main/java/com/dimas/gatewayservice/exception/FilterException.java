@@ -1,7 +1,6 @@
 package com.dimas.gatewayservice.exception;
 
 import com.dimas.gatewayservice.constant.Messages;
-
 import lombok.Getter;
 
 @Getter
