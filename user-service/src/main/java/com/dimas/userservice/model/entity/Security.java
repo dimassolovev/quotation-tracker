@@ -17,10 +17,8 @@ public class Security {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-
     @Column(name = "pair_code", unique = true, nullable = false)
     private String pairCode;
-
-    @ManyToMany(mappedBy = "securities")
+    @ManyToMany(targetEntity = UserCredentials.class, mappedBy = "securities")
     List<UserCredentials> userCredentialsList;
 }

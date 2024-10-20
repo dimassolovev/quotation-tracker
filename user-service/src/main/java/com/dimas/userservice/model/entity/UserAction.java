@@ -24,6 +24,6 @@ public class UserAction {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "userAction")
+    @OneToMany(targetEntity = UserHistory.class, mappedBy = "userAction")
     private List<UserHistory> userHistoryList;
 }

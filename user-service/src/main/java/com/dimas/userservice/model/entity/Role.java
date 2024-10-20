@@ -21,6 +21,6 @@ public class Role {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(targetEntity = UserCredentials.class, mappedBy = "roles")
     private List<UserCredentials> userCredentialsList;
 }

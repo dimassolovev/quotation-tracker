@@ -21,7 +21,7 @@ public class UserUUID {
     @Column(name = "user_uuid", unique = true, nullable = false)
     private UUID userUuid;
 
-    @OneToOne
+    @OneToOne(targetEntity = UserCredentials.class)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserCredentials userCredentials;
 }

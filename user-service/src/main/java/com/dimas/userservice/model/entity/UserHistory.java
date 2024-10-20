@@ -25,11 +25,11 @@ public class UserHistory {
     @Column(name = "time", nullable = false)
     private LocalTime time;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = UserCredentials.class)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserCredentials userCredentials;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = UserAction.class)
     @JoinColumn(name = "user_action_id", referencedColumnName = "id")
     private UserAction userAction;
 }
