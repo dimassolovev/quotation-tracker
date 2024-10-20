@@ -91,7 +91,8 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                                     .getUserUUID().getUserUuid()
 
                     ),
-                    authenticationRequest.getUsername());
+                    authenticationRequest.getUsername()
+            );
         } catch (InternalAuthenticationServiceException exception) {
             throw new GeneratingTokenException(Message.USER_NOT_FOUND);
         }
