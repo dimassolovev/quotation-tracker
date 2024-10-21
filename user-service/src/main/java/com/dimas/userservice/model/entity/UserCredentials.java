@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Builder
 @Setter
@@ -18,22 +19,8 @@ public class UserCredentials {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
-
-    @Column(name = "email", unique = true, nullable = false)
-    private String email;
-
-    @OneToOne(targetEntity = UserUUID.class, mappedBy = "userCredentials", fetch = FetchType.LAZY)
-    private UserUUID userUUID;
-
-    @ManyToMany(targetEntity = Role.class)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roles;
+    @Column(name = "uuid", unique = true, nullable = false)
+    private UUID userUUID;
 
     @OneToMany(targetEntity = UserHistory.class, mappedBy = "userCredentials")
     private List<UserHistory> userHistoryList;
