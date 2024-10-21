@@ -53,7 +53,7 @@ public class AuthenticationController {
                                     ),
                                     @Content(
                                             mediaType = "application/json",
-                                            schema =  @Schema(
+                                            schema = @Schema(
                                                     implementation = Map.class
                                             )
                                     )
@@ -96,7 +96,7 @@ public class AuthenticationController {
                                     ),
                                     @Content(
                                             mediaType = "application/json",
-                                            schema =  @Schema(
+                                            schema = @Schema(
                                                     implementation = Map.class
                                             )
                                     )
