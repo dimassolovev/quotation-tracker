@@ -19,8 +19,7 @@ public class CurrencyDataFromMoscowExchangeScheduler {
     private final MoexCurrencyResponseEventPublisher moexCurrencyResponseEventPublisher;
     private final KafkaConfigurationProperty kafkaConfigurationProperty;
 
-    //    @Scheduled(cron = "${scheduler.currency-moex-client.cron-expression}")
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(cron = "${scheduler.currency-moex-client.cron-expression}")
     public void poll() {
         List<CurrencyData> currencyDataList = this.currencyDataFromMoscowExchangeService.getCurrencyData();
 
