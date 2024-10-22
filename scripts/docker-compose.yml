@@ -1,7 +1,20 @@
 version: "3.7"
 
+volumes:
+  postgres-auth-service-db:
+  postgres-moex-data-db:
+  redis-cache:
+
+networks:
+  backend:
+    driver: bridge
 
 services:
+
+  #############################################################################
+  ###### Infrastructure #######################################################
+  #############################################################################
+
   postgres-moex-data-db:
     container_name: postgres-moex-data-db
     image: postgres:14
@@ -33,8 +46,6 @@ services:
     container_name: zookeeper
     ports:
       - "2181:2181"
-    networks:
-      - kafka-net
 
   redis-cache:
     image: redis:latest
@@ -49,18 +60,109 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - "9092:9092"
+      - "29092:29092"
+
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    networks:
-      - kafka-net
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-volumes:
-  postgres-auth-service-db:
-  postgres-moex-data-db:
-  redis-cache:
+  #############################################################################
+  ###### Services #############################################################
+  #############################################################################
 
-networks:
-  kafka-net:
-    driver: bridge
+  discovery-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: jar/discovery-service-0.0.1-SNAPSHOT.jar
+    environment:
+      DISCOVERY_SERVICE_PORT: 8761
+    ports:
+      - "8761:8761"
+
+  config-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: jar/config-service-0.0.1-SNAPSHOT.jar
+    environment:
+      DISCOVERY_URL: ${DISCOVERY_URL}
+      CONFIG_SERVICE_PORT: 8888
+      GITHUB_URL: ${GITHUB_URL}
+    ports:
+      - "8888:8888"
+
+  authentication-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: jar/authentication-service-0.0.1-SNAPSHOT.jar
+    environment:
+      API_GATEWAY_PORT: 8765
+      CONFIG_SERVICE_PORT: 8888
+      DISCOVERY_SERVICE_PORT: 8761
+      DISCOVERY_URL: ${DISCOVERY_URL}
+      CONFIG_URL: ${CONFIG_URL}
+      GITHUB_URL: ${GITHUB_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      POSTGRES_URL: ${AUTH_SERVICE_DB_URL}
+      POSTGRES_USERNAME: ${AUTH_SERVICE_DB_USER}
+      POSTGRES_PASSWORD: ${AUTH_SERVICE_DB_PASSWORD}
+    ports:
+      - "56782:56782"
+
+  moex-data-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: jar/moex-data-service-0.0.1-SNAPSHOT.jar
+    environment:
+      DISCOVERY_URL: ${DISCOVERY_URL}
+      CONFIG_URL: ${CONFIG_URL}
+      BOOTSTRAP_SERVERS: kafka:29092
+      GITHUB_URL: ${GITHUB_URL}
+      REDIS_HOST: redis-cache
+      REDIS_PORT: 6379
+      POSTGRES_URL: ${MOEX_DATA_DB_URL}
+      POSTGRES_USERNAME: ${MOEX_DATA_DB_USER}
+      POSTGRES_PASSWORD: ${MOEX_DATA_DB_PASSWORD}
+    ports:
+      - "56781:56781"
+
+  quotation-data-aggregator-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: jar/quotation-data-aggregator-service-0.0.1-SNAPSHOT.jar
+    environment:
+      DISCOVERY_URL: ${DISCOVERY_URL}
+      CONFIG_URL: ${CONFIG_URL}
+      BOOTSTRAP_SERVERS: kafka:29092
+      GITHUB_URL: ${GITHUB_URL}
+    ports:
+      - "56783:56783"
+
+  gateway-service:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: jar/gateway-service-0.0.1-SNAPSHOT.jar
+    environment:
+      API_GATEWAY_PORT: 8765
+      DISCOVERY_URL: ${DISCOVERY_URL}
+      AUTHENTICATION_SERVICE_URL: ${AUTHENTICATION_SERVICE_URL}
+      CONFIG_URL: ${CONFIG_URL}
+      GITHUB_URL: ${GITHUB_URL}
+    ports:
+      - "8765:8765"

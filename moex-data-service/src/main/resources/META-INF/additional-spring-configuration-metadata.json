@@ -9,6 +9,16 @@
       "name": "other.currency.related_path",
       "type": "java.lang.String",
       "description": "Description for other.currency.related_path."
+    },
+    {
+      "name": "redis.host",
+      "type": "java.lang.String",
+      "description": "Description for redis.host."
+    },
+    {
+      "name": "redis.port",
+      "type": "java.lang.Integer",
+      "description": "Description for redis.port."
     }
   ]
 }

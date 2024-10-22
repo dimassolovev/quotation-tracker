@@ -3,7 +3,7 @@ spring:
     name: authentication-service
 
   config:
-    import: configserver:http://localhost:${CONFIG_SERVICE_PORT}
+    import: configserver:${CONFIG_URL}
 
   cloud:
     config:

@@ -3,8 +3,12 @@ spring:
     name: moex-data-service
 
   config:
-    import: configserver:http://localhost:${CONFIG_SERVICE_PORT}
+    import: configserver:${CONFIG_URL}
 
   cloud:
     config:
       uri: ${GITHUB_URL}
+
+redis:
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}

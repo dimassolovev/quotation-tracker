@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.2_13-jdk-jammy as build
+FROM eclipse-temurin:21.0.2_13-jdk-jammy AS build
 
 ARG JAR_FILE
 WORKDIR /build

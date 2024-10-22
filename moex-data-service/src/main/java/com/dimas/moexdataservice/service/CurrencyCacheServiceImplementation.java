@@ -37,7 +37,7 @@ public class CurrencyCacheServiceImplementation implements CurrencyCacheService 
             LocalDate localDate = LocalDate.parse(date, this.dateTimeFormatter);
             List<Currency> currencies = this.currencyRepository.findByTradeDate(Date.valueOf(localDate));
 
-            return new DataDto<>(
+            return currencies.isEmpty() ? null : new DataDto<>(
                     currencies
                             .stream()
                             .map(this.currencyDataDtoMapper::toDto)
@@ -59,12 +59,12 @@ public class CurrencyCacheServiceImplementation implements CurrencyCacheService 
             LocalDate localDate = LocalDate.parse(date, this.dateTimeFormatter);
             List<Currency> currencies = this.currencyRepository.findByFiltration(Date.valueOf(localDate), pairCode);
 
-            List<CurrencyDataDto> dtoCurrencies = currencies
-                    .stream()
-                    .map(this.currencyDataDtoMapper::toDto)
-                    .toList();
-
-            return dtoCurrencies.isEmpty() ? null : new DataDto<>(dtoCurrencies);
+            return currencies.isEmpty() ? null : new DataDto<>(
+                    currencies
+                            .stream()
+                            .map(this.currencyDataDtoMapper::toDto)
+                            .toList()
+            );
 
         } catch (DateTimeParseException exception) {
             throw new IncorrectDateFormat(Message.INCORRECT_DATE_FORMAT);
