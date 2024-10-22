@@ -111,6 +111,7 @@
         <module>discovery-service</module>
         <module>gateway-service</module>
         <module>config-service</module>
+        <module>moex-data-service</module>
         <module>authentication-service</module>
         <module>quotation-data-aggregator-service</module>
     </modules>
