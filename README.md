@@ -1,7 +1,8 @@
-<div style="display: flex; justify-content: center;">
+<div align="center">
     <img src="assets/introduction.gif" alt="Demo Quotation Tracker">
 </div>
-<div style="display: flex; justify-content: center;">
+
+<div align="center">
     <h1>Quotation Tracker</h1>
 </div>
 
