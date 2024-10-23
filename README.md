@@ -59,11 +59,13 @@
     <h1>Технологический стек</h1>
 </div>
 
-- **PostgreSQL** – реляционная база данных для хранения котировок.
-- **Redis** – система кэширования данных для ускорения обработки частых запросов.
-- **Kafka** – платформа для передачи сообщений между сервисами.
-- **Prometheus** – система мониторинга для сбора и хранения метрик.
-- **Grafana** – инструмент для визуализации метрик.
-- **Docker** – для контейнеризации всех компонентов системы.
-- **Swagger** - для автоматической генерации документации к API и облегчения взаимодействия с ним. 
-- **Spring Cloud** – микросервисная архитектура, обеспечивающая взаимодействие сервисов и обработку данных.
+<div style="text-align: center;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1985px-Postgresql_elephant.svg.png" alt="PostgreSQL" title="PostgreSQL" width="100" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original-wordmark.svg" alt="Redis" title="Redis" width="100" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original-wordmark.svg" alt="Kafka" title="Kafka" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/2066px-Prometheus_software_logo.svg.png" title="Prometheus" width="100" />
+    <img src="https://grafana.com/static/img/menu/grafana2.svg" alt="Grafana" title="Grafana" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" alt="Swagger" title="Swagger" width="100" />
+    <img src="https://static-00.iconduck.com/assets.00/docker-icon-1024x1024-mv7uzno8.png" alt="Docker" title="Docker" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Spring_Boot.svg/640px-Spring_Boot.svg.png" alt="Spring Cloud" title="Spring Cloud" width="100" />
+</div>
