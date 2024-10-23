@@ -1,18 +1,18 @@
-CREATE SEQUENCE security_id_seq
+CREATE SEQUENCE IF NOT EXISTS security_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 5;
 
-CREATE SEQUENCE clearing_type_id_seq
+CREATE SEQUENCE IF NOT EXISTS clearing_type_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 5;
 
-CREATE SEQUENCE currency_data_id_seq
+CREATE SEQUENCE IF NOT EXISTS currency_data_id_seq
     START WITH 1
     INCREMENT BY 45
     NO MINVALUE

@@ -1,0 +1,12 @@
+global:
+  scrape_interval:     5s
+
+  external_labels:
+    monitor: 'codelab-monitor'
+
+scrape_configs:
+  - job_name: 'moex-data-service'
+    scrape_interval: 5s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['moex-data-service:56781']
