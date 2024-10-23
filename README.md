@@ -69,3 +69,198 @@
     <img src="assets/logo/docker-icon-1024x1024-mv7uzno8.png" alt="Docker" title="Docker" width="100" />
     <img src="assets/logo/Spring_Boot.svg.png" alt="Spring Cloud" title="Spring Cloud" width="100" />
 </div>
+
+<div align="center">
+    <h1>Работа приложения</h1>
+</div>
+
+### Аутентификация:
+
+```bash
+#### Запрос:
+curl --location 'http://localhost:8765/v1/authentication/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "dimas",
+    "password": "dimas",
+    "email": "gohasoxx@gmail.com"
+}'
+```
+
+### Получение токена:
+
+#### Запрос:
+```bash
+curl --location 'http://localhost:8765/v1/authentication/token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "dimas",
+    "password": "dimas",
+    "email": "gohasoxx@gmail.com"
+}'
+```
+#### Ответ:
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImdvaGFzb3h4QGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ1dWlkIjoiNjU3ZmM3M2QtZjg2OS00ZmQ1LTkzNzctZjAwNzBmY2Y3Y2JkIiwic3ViIjoiZGltYXMiLCJpYXQiOjE3Mjk2ODkzMzgsImV4cCI6MTcyOTc3NTczOH0.EbdQBdfJGRjOaupQBcBmG73KbMscfk1genOaSVwxytM"
+}
+```
+
+### Валидация токена:
+
+#### Запрос:
+```
+curl --location 'http://localhost:56782/v1/authentication/validate-token' \
+--header 'Content-Type: application/json' \
+--data '{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImdvaGFzb3h4QGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJ1dWlkIjoiNjU3ZmM3M2QtZjg2OS00ZmQ1LTkzNzctZjAwNzBmY2Y3Y2JkIiwic3ViIjoiZGltYXMiLCJpYXQiOjE3Mjk2ODkzMzgsImV4cCI6MTcyOTc3NTczOH0.EbdQBdfJGRjOaupQBcBmG73KbMscfk1genOaSVwxytM"
+}'
+```
+
+#### Ответ:
+```true```
+
+### Получение котировок по дате:
+
+#### Запрос:
+```bash
+curl --location 'http://localhost:8765/v1/currencies/list?tradeDate=2024-10-17' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwiZW1haWwiOiJnb2hhc294eEBnbWFpbC5jb20iLCJ1dWlkIjoiMGExMGMyYWEtYmU4MS00MTcwLWExMDEtMTVkZDg2NDhlYTFhIiwic3ViIjoiZGltYXMiLCJpYXQiOjE3Mjk2MTc1MDUsImV4cCI6MTcyOTcwMzkwNX0.07qYOKzaRhtQK-Phb4pxT3qmmIwxT2zzKOBQNnHWCiM'
+```
+
+#### Ответ:
+```json
+{
+    "data": [
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 2.8411,
+            "clearing": "pk",
+            "secid": "TRY/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 2.8411,
+            "clearing": "vk",
+            "secid": "TRY/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 12.5379,
+            "clearing": "pk",
+            "secid": "HKD/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 12.5192,
+            "clearing": "vk",
+            "secid": "HKD/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 127.3481,
+            "clearing": "pk",
+            "secid": "GBP/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 126.3811,
+            "clearing": "vk",
+            "secid": "GBP/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 97.2568,
+            "clearing": "pk",
+            "secid": "USD/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 97.149,
+            "clearing": "vk",
+            "secid": "USD/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 106.0844,
+            "clearing": "pk",
+            "secid": "EUR/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 105.756,
+            "clearing": "vk",
+            "secid": "EUR/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 70.4504,
+            "clearing": "pk",
+            "secid": "CAD/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 70.5461,
+            "clearing": "vk",
+            "secid": "CAD/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 112.7877,
+            "clearing": "pk",
+            "secid": "CHF/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 112.285,
+            "clearing": "vk",
+            "secid": "CHF/RUB"
+        }
+    ]
+}
+```
+
+### Получение котировок по дате и коду валюты:
+
+#### Запрос:
+
+```bash
+curl --location 'http://localhost:8765/v1/currencies/list/USD?tradeDate=2024-10-17' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwiZW1haWwiOiJnb2hhc294eEBnbWFpbC5jb20iLCJ1dWlkIjoiMGExMGMyYWEtYmU4MS00MTcwLWExMDEtMTVkZDg2NDhlYTFhIiwic3ViIjoiZGltYXMiLCJpYXQiOjE3Mjk2MTc1MDUsImV4cCI6MTcyOTcwMzkwNX0.07qYOKzaRhtQK-Phb4pxT3qmmIwxT2zzKOBQNnHWCiM'
+```
+
+#### Ответ:
+```json
+{
+    "data": [
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "13:45:00",
+            "rate": 97.2568,
+            "clearing": "pk",
+            "secid": "USD/RUB"
+        },
+        {
+            "tradedate": "2024-10-17",
+            "tradetime": "18:49:00",
+            "rate": 97.149,
+            "clearing": "vk",
+            "secid": "USD/RUB"
+        }
+    ]
+}
+```
