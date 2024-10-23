@@ -60,14 +60,14 @@
 </div>
 
 <div style="text-align: center;">
-    <img src="assets/logo/Postgresql_elephant.svg.png" alt="PostgreSQL" title="PostgreSQL" width="100" />
-    <img src="assets/logo/redis-original-wordmark.svg" alt="Redis" title="Redis" width="100" />
-    <img src="assets/logo/35ce20_kafka_300x300_f5c0fc1ac1.png" alt="Kafka" title="Kafka" width="100" />
-    <img src="assets/logo/Prometheus_software_logo.svg.png" title="Prometheus" width="100" />
-    <img src="assets/logo/grafana2.svg" alt="Grafana" title="Grafana" width="100" />
-    <img src="assets/logo/Swagger-logo.png" alt="Swagger" title="Swagger" width="100" />
-    <img src="assets/logo/docker-icon-1024x1024-mv7uzno8.png" alt="Docker" title="Docker" width="100" />
-    <img src="assets/logo/Spring_Boot.svg.png" alt="Spring Cloud" title="Spring Cloud" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1985px-Postgresql_elephant.svg.png" width="100" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original-wordmark.svg" alt="Redis" title="Redis" width="100" />
+    <img src="https://estuary.dev/static/176f17fa158ab922c8009a7fd0d19ebf/67d4a/35ce20_kafka_300x300_f5c0fc1ac1.png" alt="Kafka" title="Kafka" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/2066px-Prometheus_software_logo.svg.png" title="Prometheus" width="100" />
+    <img src="https://grafana.com/static/img/menu/grafana2.svg" alt="Grafana" title="Grafana" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" alt="Swagger" title="Swagger" width="100" />
+    <img src="https://static-00.iconduck.com/assets.00/docker-icon-1024x1024-mv7uzno8.png" alt="Docker" title="Docker" width="100" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Spring_Boot.svg/640px-Spring_Boot.svg.png" alt="Spring Cloud" title="Spring Cloud" width="100" />
 </div>
 
 <div align="center">
@@ -77,7 +77,6 @@
 ### Аутентификация:
 
 ```bash
-#### Запрос:
 curl --location 'http://localhost:8765/v1/authentication/register' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -264,3 +263,22 @@ curl --location 'http://localhost:8765/v1/currencies/list/USD?tradeDate=2024-10-
     ]
 }
 ```
+
+<div align="center">
+    <h1>Конфиг приложения</h1>
+</div>
+
+### Конфигурацию приложения можно найти [здесь](https://github.com/dimassolovev/config)
+
+<div align="center">
+    <h1>Заключение</h1>
+</div>
+
+Проект **Quotation Tracker** предоставляет эффективное решение для мониторинга и анализа котировок с Московской биржи. С использованием современных технологий, таких как Spring Cloud, Kafka, Redis, PostgreSQL и Docker, он обеспечивает надежное и масштабируемое решение для обработки и хранения данных.
+
+Если у вас есть вопросы, предложения или вы хотите обсудить проект, вы можете связаться со мной:
+
+- **Telegram**: [dimassolovev](https://t.me/dimassolovev)
+- **Email**: [gohasoxx@gmail.com](mailto:gohasoxx@gmail.com)
+
+**Спасибо за внимание!**
