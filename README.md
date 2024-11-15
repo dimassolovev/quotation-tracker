@@ -27,7 +27,7 @@
 </div>
 
 <div align="center">
-    <img src="assets/services.png" alt="Demo Quotation Tracker">
+    <img src="assets/services.jpg" alt="Demo Quotation Tracker">
 </div>
 
 ### 1. Quotation Data Aggregator Service
