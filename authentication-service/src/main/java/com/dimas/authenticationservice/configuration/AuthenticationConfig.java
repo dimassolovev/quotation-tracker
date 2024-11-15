@@ -1,7 +1,7 @@
 package com.dimas.authenticationservice.configuration;
 
 import com.dimas.authenticationservice.model.dto.ExceptionMessage;
-import com.dimas.authenticationservice.service.UserService;
+import com.dimas.authenticationservice.service.implementation.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -81,7 +81,7 @@ public class AuthenticationConfig {
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        var daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(this.userService);
 

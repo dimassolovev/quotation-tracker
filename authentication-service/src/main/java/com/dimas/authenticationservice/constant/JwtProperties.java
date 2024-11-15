@@ -9,5 +9,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
     private String secretKey;
-    private long timeMillis;
+    private Long timeMillis;
 }

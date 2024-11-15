@@ -10,9 +10,7 @@ public class ObjectMapperConfig {
 
     @Bean
     public ObjectMapper objectMapper() {
-
-        ObjectMapper mapper = new ObjectMapper();
-
+        var mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         return mapper;

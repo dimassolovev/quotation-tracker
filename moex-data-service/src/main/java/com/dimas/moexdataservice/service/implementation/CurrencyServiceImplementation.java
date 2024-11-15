@@ -1,4 +1,4 @@
-package com.dimas.moexdataservice.service;
+package com.dimas.moexdataservice.service.implementation;
 
 import com.dimas.moexdataservice.mapper.kafka.CurrentDataMapper;
 import com.dimas.moexdataservice.mapper.kafka.SecurityDataMapper;
@@ -10,6 +10,7 @@ import com.dimas.moexdataservice.model.kafka.currency.SecurityData;
 import com.dimas.moexdataservice.repository.ClearingTypeRepository;
 import com.dimas.moexdataservice.repository.CurrencyRepository;
 import com.dimas.moexdataservice.repository.SecurityRepository;
+import com.dimas.moexdataservice.service.CurrencyService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +32,7 @@ public class CurrencyServiceImplementation implements CurrencyService {
 
     @PostConstruct
     public void init() {
-        Map<String, ClearingType> clearingTypeMap = this.clearingTypeRepository
+        var clearingTypeMap = this.clearingTypeRepository
                 .findAll()
                 .stream()
                 .collect(
@@ -42,7 +42,7 @@ public class CurrencyServiceImplementation implements CurrencyService {
                         )
                 );
 
-        Map<String, Security> securityMap = this.securityRepository
+        var securityMap = this.securityRepository
                 .findAll()
                 .stream()
                 .collect(
@@ -64,11 +64,11 @@ public class CurrencyServiceImplementation implements CurrencyService {
         List<Currency> currencies = new ArrayList<>();
 
         for (SecurityData securityData : currencyData.getSecurities()) {
-            Currency currency = this.securityDataMapper.toEntity(securityData);
+            var currency = this.securityDataMapper.toEntity(securityData);
             currencies.add(currency);
         }
 
-        Currency currency = this.currentDataMapper.toEntity(currencyData.getCurrent());
+        var currency = this.currentDataMapper.toEntity(currencyData.getCurrent());
         currencies.add(currency);
 
         this.currencyRepository.saveAll(currencies);

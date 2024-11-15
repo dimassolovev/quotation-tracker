@@ -3,6 +3,7 @@ version: "3.7"
 volumes:
   postgres-auth-service-db:
   postgres-moex-data-db:
+  postgres-transaction-outbox-db:
   redis-cache:
   prometheus:
 
@@ -41,6 +42,19 @@ services:
       - "127.0.0.1:5433:5432"
     volumes:
       - postgres-auth-service-db:/var/lib/postgresql/auth-service/data
+
+  postgres-transaction-outbox-db:
+    container_name: postgres-transaction-outbox-db
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: ${TRANSACTION_OUTBOX_DB}
+      POSTGRES_USER: ${TRANSACTION_OUTBOX_USER}
+      POSTGRES_PASSWORD: ${TRANSACTION_OUTBOX_PASSWORD}
+    ports:
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - postgres-transaction-outbox-db:/var/lib/postgresql/transaction-outbox/data
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -165,6 +179,9 @@ services:
       CONFIG_URL: ${CONFIG_URL}
       BOOTSTRAP_SERVERS: kafka:29092
       GITHUB_URL: ${GITHUB_URL}
+      POSTGRES_URL: ${TRANSACTION_OUTBOX_DB_URL}
+      POSTGRES_USERNAME: ${TRANSACTION_OUTBOX_DB_USER}
+      POSTGRES_PASSWORD: ${TRANSACTION_OUTBOX_DB_PASSWORD}
     ports:
       - "56783:56783"
 

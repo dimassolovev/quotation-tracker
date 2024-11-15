@@ -1,13 +1,13 @@
-package com.dimas.authenticationservice.service;
+package com.dimas.authenticationservice.service.implementation;
 
-import com.dimas.authenticationservice.model.entity.UserCredentials;
+import com.dimas.authenticationservice.constant.Message;
+import com.dimas.authenticationservice.exception.UserNotFoundException;
 import com.dimas.authenticationservice.repository.UserCredentialsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +18,10 @@ public class UserService implements UserDetailsService {
     private final UserCredentialsRepository userCredentialsRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserCredentials userCredentials = this.userCredentialsRepository.findByUsername(username).orElseThrow(RuntimeException::new);
+    public UserDetails loadUserByUsername(String username) {
+        var userCredentials = this.userCredentialsRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(Message.USER_NOT_FOUND));
 
         return new User(
                 userCredentials.getUsername(),

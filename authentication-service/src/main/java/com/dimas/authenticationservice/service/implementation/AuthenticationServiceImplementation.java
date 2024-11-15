@@ -1,21 +1,21 @@
-package com.dimas.authenticationservice.service;
+package com.dimas.authenticationservice.service.implementation;
 
 import com.dimas.authenticationservice.constant.Message;
 import com.dimas.authenticationservice.exception.EntryException;
 import com.dimas.authenticationservice.exception.GeneratingTokenException;
 import com.dimas.authenticationservice.mapper.UserCredentialsMapper;
 import com.dimas.authenticationservice.model.dto.AuthenticationRequest;
-import com.dimas.authenticationservice.model.entity.UserCredentials;
 import com.dimas.authenticationservice.model.entity.UserUUID;
 import com.dimas.authenticationservice.repository.UserCredentialsRepository;
 import com.dimas.authenticationservice.repository.UserUUIDRepository;
+import com.dimas.authenticationservice.service.AuthenticationService;
+import com.dimas.authenticationservice.service.RoleService;
 import com.dimas.authenticationservice.util.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,7 +42,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     @Override
     @Transactional
     public void register(AuthenticationRequest authenticationRequest) throws EntryException {
-        UserCredentials userCredentials = this.userCredentialsMapper.toEntity(authenticationRequest);
+        var userCredentials = this.userCredentialsMapper.toEntity(authenticationRequest);
 
         userCredentials.setPassword(
                 this.passwordEncoder.encode(userCredentials.getPassword())
@@ -53,7 +53,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         try {
             userCredentials = this.userCredentialsRepository.save(userCredentials);
 
-            UserUUID userUUID = UserUUID.builder()
+            var userUUID = UserUUID.builder()
                     .userUuid(UUID.randomUUID())
                     .userCredentials(userCredentials)
                     .build();
@@ -69,7 +69,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     @Override
     public String login(AuthenticationRequest authenticationRequest) throws GeneratingTokenException {
         try {
-            Authentication authentication = this.authenticationManager.authenticate(
+            var authentication = this.authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             authenticationRequest.getUsername(), authenticationRequest.getPassword()
                     )

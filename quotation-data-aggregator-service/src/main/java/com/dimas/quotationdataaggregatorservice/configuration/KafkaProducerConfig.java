@@ -42,7 +42,6 @@ public class KafkaProducerConfig {
     @Bean
     public ProducerFactory<String, DataFromExternalServices<?>> producerFactory() {
 
-
         return new DefaultKafkaProducerFactory<>(
                 this.producerConfig(),
                 new StringSerializer(),
@@ -60,7 +59,7 @@ public class KafkaProducerConfig {
         return TopicBuilder
                 .name(kafkaConfigurationProperty.getTopic())
                 .partitions(3)
-                .replicas(2)
+                .replicas(1)
                 .config(
                         TopicConfig.RETENTION_MS_CONFIG,
                         String.valueOf(Duration.ofDays(

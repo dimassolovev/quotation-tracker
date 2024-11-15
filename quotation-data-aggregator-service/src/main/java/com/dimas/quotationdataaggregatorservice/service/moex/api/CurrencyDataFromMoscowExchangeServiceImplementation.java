@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CurrencyDataFromMoscowExchangeServiceImplementation implements CurrencyDataFromMoscowExchangeService {
+public class CurrencyDataFromMoscowExchangeServiceImplementation implements DataFromMoscowExchangeService<List<CurrencyData>> {
     private final CurrencyMoexClientProperty currencyMoexClientProperty;
     private final DateTimeFormatter dateTimeFormatter;
     private final MoscowExchangeClient moscowExchangeClient;
@@ -24,9 +24,9 @@ public class CurrencyDataFromMoscowExchangeServiceImplementation implements Curr
 
     @Override
     public List<CurrencyData> getCurrencyData() {
-        String currentDate = LocalDate.now().format(this.dateTimeFormatter);
-        String pastDate = LocalDate.parse(currentDate, this.dateTimeFormatter).minusDays(6).format(this.dateTimeFormatter);
-        List<CurrencyData> currencyDataList = new ArrayList<>();
+        var currentDate = LocalDate.now().format(this.dateTimeFormatter);
+        var pastDate = LocalDate.parse(currentDate, this.dateTimeFormatter).minusDays(6).format(this.dateTimeFormatter);
+        var currencyDataList = new ArrayList<CurrencyData>();
 
         for (String security : this.currencyMoexClientProperty.getSecurities()) {
             CurrencyData currencyData = null;
@@ -55,7 +55,6 @@ public class CurrencyDataFromMoscowExchangeServiceImplementation implements Curr
 
             currencyDataList.add(currencyData);
         }
-
         return currencyDataList;
     }
 }

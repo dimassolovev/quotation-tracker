@@ -10,7 +10,7 @@ public class ObjectMapperConfig {
 
     @Bean
     public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
+        var mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
 
         return mapper;

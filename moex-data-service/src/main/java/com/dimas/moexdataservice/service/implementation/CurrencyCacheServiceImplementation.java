@@ -1,12 +1,12 @@
-package com.dimas.moexdataservice.service;
+package com.dimas.moexdataservice.service.implementation;
 
 import com.dimas.moexdataservice.constant.Message;
 import com.dimas.moexdataservice.exception.IncorrectDateFormat;
 import com.dimas.moexdataservice.mapper.dto.CurrencyDataDtoMapper;
 import com.dimas.moexdataservice.model.dto.currency.CurrencyDataDto;
 import com.dimas.moexdataservice.model.dto.currency.DataDto;
-import com.dimas.moexdataservice.model.entity.currency.Currency;
 import com.dimas.moexdataservice.repository.CurrencyRepository;
+import com.dimas.moexdataservice.service.CurrencyCacheService;
 import com.dimas.moexdataservice.util.DateValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -34,8 +34,8 @@ public class CurrencyCacheServiceImplementation implements CurrencyCacheService 
     )
     public DataDto<List<CurrencyDataDto>> find(String date) throws IncorrectDateFormat {
         try {
-            LocalDate localDate = LocalDate.parse(date, this.dateTimeFormatter);
-            List<Currency> currencies = this.currencyRepository.findByTradeDate(Date.valueOf(localDate));
+            var localDate = LocalDate.parse(date, this.dateTimeFormatter);
+            var currencies = this.currencyRepository.findByTradeDate(Date.valueOf(localDate));
 
             return currencies.isEmpty() ? null : new DataDto<>(
                     currencies
@@ -56,8 +56,8 @@ public class CurrencyCacheServiceImplementation implements CurrencyCacheService 
     )
     public DataDto<List<CurrencyDataDto>> findByPairCode(String date, String pairCode) throws IncorrectDateFormat {
         try {
-            LocalDate localDate = LocalDate.parse(date, this.dateTimeFormatter);
-            List<Currency> currencies = this.currencyRepository.findByFiltration(Date.valueOf(localDate), pairCode);
+            var localDate = LocalDate.parse(date, this.dateTimeFormatter);
+            var currencies = this.currencyRepository.findByFiltration(Date.valueOf(localDate), pairCode);
 
             return currencies.isEmpty() ? null : new DataDto<>(
                     currencies

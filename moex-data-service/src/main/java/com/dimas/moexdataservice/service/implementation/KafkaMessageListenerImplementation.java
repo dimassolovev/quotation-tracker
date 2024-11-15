@@ -1,8 +1,9 @@
-package com.dimas.moexdataservice.service;
+package com.dimas.moexdataservice.service.implementation;
 
 import com.dimas.moexdataservice.model.kafka.currency.CurrencyData;
 import com.dimas.moexdataservice.model.kafka.currency.DataFromAggregator;
 import com.dimas.moexdataservice.publisher.KafkaResponsePublisher;
+import com.dimas.moexdataservice.service.KafkaMessageListener;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,8 @@ public class KafkaMessageListenerImplementation implements KafkaMessageListener 
         try {
             DataFromAggregator<CurrencyData> dataFromAggregator = objectMapper.readValue(consumerRecord.value(), new TypeReference<>() {
             });
-            System.out.println(dataFromAggregator);
-
             this.kafkaResponsePublisher.publishResponseFromSourcesEvent(dataFromAggregator);
+
         } catch (Exception exception) {
             log.error(exception.getMessage(), exception);
         }

@@ -19,10 +19,9 @@ public class DateValidator {
         }
 
         try {
-            LocalDate parsedDate = LocalDate.parse(date, dateTimeFormatter);
-
-            LocalDate startOfWeek = LocalDate.now().with(DayOfWeek.MONDAY).minusDays(1);
-            LocalDate endOfWeek = LocalDate.now().with(DayOfWeek.SUNDAY).plusDays(1);
+            var parsedDate = LocalDate.parse(date, dateTimeFormatter);
+            var startOfWeek = LocalDate.now().with(DayOfWeek.MONDAY).minusDays(1);
+            var endOfWeek = LocalDate.now().with(DayOfWeek.SUNDAY).plusDays(1);
 
             return parsedDate.isAfter(startOfWeek) && parsedDate.isBefore(endOfWeek);
 

@@ -13,8 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @Slf4j
 @Component
 @Setter(onMethod = @__(@Autowired))
@@ -32,22 +30,22 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 .filter(isSecured -> isSecured)
                 .switchIfEmpty(Mono.error(new FilterException(Messages.ROUTE_IS_NOT_SECURED)))
                 .then(Mono.defer(() -> {
-                    boolean hasAuthorizationHeader = exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION);
+                    var hasAuthorizationHeader = exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION);
                     if (!hasAuthorizationHeader) {
                         return Mono.error(new FilterException(Messages.AUTHENTICATION_HEADER_FAILED));
                     }
 
-                    List<String> authorizationHeaders = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION);
+                    var authorizationHeaders = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION);
                     if (authorizationHeaders == null || authorizationHeaders.isEmpty()) {
                         return Mono.error(new FilterException(Messages.EMPTY_AUTHENTICATION_HEADER));
                     }
 
-                    String token = authorizationHeaders.get(0);
+                    var token = authorizationHeaders.get(0);
                     if (token == null || !token.startsWith("Bearer ")) {
                         return Mono.error(new FilterException(Messages.INVALID_TOKEN_FORMAT));
                     }
 
-                    String actualToken = token.substring(7);
+                    var actualToken = token.substring(7);
                     return authenticationService.validateToken(new TokenBody(actualToken))
                             .flatMap(isValid -> {
                                 if (!isValid) {

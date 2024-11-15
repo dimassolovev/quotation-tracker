@@ -1,7 +1,5 @@
 package com.dimas.authenticationservice.controller.advice;
 
-import com.dimas.authenticationservice.exception.EntryException;
-import com.dimas.authenticationservice.exception.GeneratingTokenException;
 import com.dimas.authenticationservice.model.dto.ExceptionMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +13,8 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(GeneratingTokenException.class)
-    public ResponseEntity<ExceptionMessage> handleGeneratingTokenException(GeneratingTokenException exception) {
-        return new ResponseEntity<>(new ExceptionMessage(exception.getMessage()), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(EntryException.class)
-    public ResponseEntity<ExceptionMessage> handleEntryException(EntryException exception) {
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ExceptionMessage> handleGeneratingTokenException(RuntimeException exception) {
         return new ResponseEntity<>(new ExceptionMessage(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 

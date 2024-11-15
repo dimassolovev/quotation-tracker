@@ -6,6 +6,11 @@
       "description": "Description for scheduler.currency-moex-client.cron-expression."
     },
     {
+      "name": "scheduler.currency-moex-client.outbox-cron-expression",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.currency-moex-client.cron-expression."
+    },
+    {
       "name": "scheduler.currency-moex-client.limit",
       "type": "java.lang.Integer",
       "description": "Description for scheduler.currency-moex-client.limit."

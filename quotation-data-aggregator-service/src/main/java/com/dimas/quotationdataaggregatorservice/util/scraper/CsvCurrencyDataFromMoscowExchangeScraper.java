@@ -24,7 +24,7 @@ public class CsvCurrencyDataFromMoscowExchangeScraper {
     public CurrencyData parseCurrencyDataFromMoscowExchange(String csvData) throws IOException {
         csvData = this.stringTool.filterEmptyLines(csvData);
 
-        List<Security> securities = this.parseSecurities(csvData);
+        var securities = this.parseSecurities(csvData);
         Current current = this.parseCurrent(csvData);
 
         return new CurrencyData(securities, current);
@@ -33,7 +33,7 @@ public class CsvCurrencyDataFromMoscowExchangeScraper {
     private List<Security> parseSecurities(String csvData) throws IOException {
         csvData = this.stringTool.removeSection(csvData, "securities");
         csvData = this.stringTool.removeUnnecessarySectionsAfterSection(csvData, "securities.cursor");
-        StringReader stringReader = new StringReader(csvData);
+        var stringReader = new StringReader(csvData);
 
         MappingIterator<Security> securitiesIterator = this.csvMapper.readerFor(Security.class)
                 .with(this.csvSchema)
@@ -46,7 +46,7 @@ public class CsvCurrencyDataFromMoscowExchangeScraper {
         csvData = this.stringTool.removeUnnecessarySectionsBeforeSection(csvData, "securities.current");
         csvData = this.stringTool.removeSection(csvData, "securities.current");
 
-        StringReader stringReader = new StringReader(csvData);
+        var stringReader = new StringReader(csvData);
 
 
         MappingIterator<Current> currentIterator = this.csvMapper.readerFor(Current.class)

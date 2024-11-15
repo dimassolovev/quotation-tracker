@@ -16,7 +16,7 @@ public class StringTool {
     }
 
     public String removeUnnecessarySectionsBeforeSection(String csvData, String section) {
-        int index = csvData.indexOf(section);
+        var index = csvData.indexOf(section);
         return index != -1 ? csvData.substring(index) : csvData;
     }
 
@@ -25,7 +25,7 @@ public class StringTool {
     }
 
     public String removeUnnecessarySectionsAfterSection(String csvData, String section) {
-        int index = csvData.indexOf(section);
+        var index = csvData.indexOf(section);
         return index != -1 ? csvData.substring(0, index) : csvData;
     }
 }
