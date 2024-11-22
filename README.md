@@ -86,7 +86,6 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/2066px-Prometheus_software_logo.svg.png" title="Prometheus" width="100" />
     <img src="https://grafana.com/static/img/menu/grafana2.svg" alt="Grafana" title="Grafana" width="100" />
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" alt="Swagger" title="Swagger" width="100" />
-    <img src="https://static-00.iconduck.com/assets.00/docker-icon-1024x1024-mv7uzno8.png" alt="Docker" title="Docker" width="100" />
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Spring_Boot.svg/640px-Spring_Boot.svg.png" alt="Spring Cloud" title="Spring Cloud" width="100" />
 </div>
 
